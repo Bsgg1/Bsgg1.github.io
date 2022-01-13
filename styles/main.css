@@ -3227,3 +3227,43 @@ a {
     margin-bottom: 10px;
   }
 }
+
+      .posttitlewithoutimg {
+        color: #f08c00;
+      }
+    
+        .menubutton {
+          color: #da77f2;
+        }
+
+        .menucontainer span::before,
+        .menucontainer span::after {
+          color:#da77f2;
+          content: attr(data-text);
+          position: absolute;
+          top: -0.5em;
+          left: 0;
+          width: 100%;
+          transition: 0.3s ease-out;
+        }
+
+        .menubutton:visited{
+          color: #da77f2;
+        }
+      
+        .posttitle {
+          color: #fcc419;
+        }
+      
+        #sitegotimeDate,#sitegotimes,#footinfo,#footinfo a{
+          color: #ff8787;
+        }
+      
+        .mobiledescribtion{
+          color: #ff8787;
+        }
+      
+        .navbar-inverse{
+          background-color: #15aabf;
+        }
+      

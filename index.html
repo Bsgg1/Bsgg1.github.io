@@ -93,7 +93,7 @@
                         src='https://Bsgg1.github.io//media/images/music.png' alt="音乐播放器" class="musicbtn"></i></a>
         </div>
         <div class="avatar-border">
-            <img src="https://Bsgg1.github.io//images/avatar.png?v=1642061978315" class="avatar">
+            <img src="https://Bsgg1.github.io//images/avatar.png?v=1642062084099" class="avatar">
         </div>
         <div class="sitename">松松的小窝</div>
         <span class="description" data-text='["ddl是唯一生产力"]'>&nbsp;</span>
@@ -901,7 +901,7 @@ menulist.eq(i).show();
                         <!-- 移动端欢迎页 -->
 <div class="welcome">
     <div class="avatar-border">
-        <img src="https://Bsgg1.github.io//images/avatar.png?v=1642061978315" class="avatar">
+        <img src="https://Bsgg1.github.io//images/avatar.png?v=1642062084099" class="avatar">
     </div>
     <span class="mobiledescribtion"></span>
 </div>
@@ -991,9 +991,120 @@ menulist.eq(i).show();
                     <link rel="stylesheet" href="https://Bsgg1.github.io//media/css/font-awesome.css">
 
 
-<div id="post-container">
+    <div style="display: none;">
+        
+    </div>
+
     
-</div>
+    <div id="post-container" class="eleg-allpostscontainer">
+        <div v-for="post in postinfo" class="eleg-posts">
+            <div v-if="post.elegcontainer=='eleg-postcontainer-left'">
+                    <div :class="post.elegcontainer">
+                        <img :src="post.feature" alt="" :class="post.imgclass">
+                        
+                        <div class="eleg-info">
+                            <span class="eleg-title">{{post.title}}</span>
+                            <div style="margin-top:15px;">
+                                <span class="postdate eleg-date"><i class="fa fa-calendar"></i>{{post.date}}</span>
+                                <span class="poststatus postdate eleg-stats"><i class="fa fa-clock-o"></i> {{post.stats}}</span>
+                            </div>
+                            <div style="margin-top:50px">
+                                <a :href="post.link" class="eleg-btn" data-pjax>阅读全文</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='eleg-tags'>
+                        <div v-for="(tag,i) in post.tags">
+                            <div class="posttag">
+                                <a data-pjax :href="post.taglink[i]" class="postlink eleg-postlink">
+                                    <i class="fa fa-tag"></i>{{tag}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div v-else>
+                    <div :class="post.elegcontainer">
+                        <div class="eleg-info">
+                            <span class="eleg-title">{{post.title}}</span>
+                            <div style="margin-top:15px;">
+                                <span class="postdate eleg-date"><i class="fa fa-calendar"></i>{{post.date}}</span>
+                                <span class="poststatus postdate eleg-stats"><i class="fa fa-clock-o"></i> {{post.stats}}</span>
+                            </div>
+                            <div style="margin-top:50px">
+                                <a :href="post.link" class="eleg-btn" data-pjax>阅读全文</a>
+                            </div>
+                        </div>
+                        
+                        <img :src="post.feature" alt="" :class="post.imgclass">
+                    </div>
+                    <div class='eleg-tags'>
+                        <div v-for="(tag,i) in post.tags">
+                            <div class="posttag">
+                                <a data-pjax :href="post.taglink[i]" class="postlink eleg-postlink">
+                                    <i class="fa fa-tag"></i>{{tag}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script>
+    var app2 = new Vue({
+      el: '#post-container',
+      mounted:function(){
+        this.getpostInfo();
+      },
+      methods:{
+         getpostInfo:function(){
+             var plflist = $("span[name='plfeature']");
+             var pltlist = $("span[name='pltitle']");
+             var plllist = $("span[name='pllink']");
+             var pldlist = $("span[name='pldate']");
+             var plslist = $("span[name='plstats']");
+             var pltaglist = $("span[name='pltag']");
+             var pltaglinklist = $("span[name='pltaglink']")
+             for(var i=0;i<this.pagesize&&i<plflist.length;i++){
+                 var d = {};
+                 var tags = []
+                 var taglink = []
+                 d["feature"] = plflist.eq(i).html();
+                 d["title"] = pltlist.eq(i).html();
+                 d["link"] = plllist.eq(i).html();
+                 d["date"] = pldlist.eq(i).html();
+                 d['stats'] = plslist.eq(i).html();
+                 for(var j=0;j<pltaglist.length;j++){
+                     if(pltaglist.eq(j).attr('alt')==d['title'])
+                        tags.push(pltaglist.eq(j).html())
+                 }
+                 d["tags"] = tags;
+                 for(var j=0;j<pltaglinklist.length;j++){
+                    if(pltaglinklist.eq(j).attr('alt')==d['title'])
+                        taglink.push(pltaglinklist.eq(j).html())
+                 }
+                 d["taglink"] = taglink
+                 if(i%2==0)
+                 {
+                     d['elegcontainer'] = 'eleg-postcontainer-left';
+                     d['imgclass'] = 'eleg-img-left'
+                 }
+                 else{
+                    d['elegcontainer'] = 'eleg-postcontainer-right';
+                    d['imgclass'] = 'eleg-img-right' 
+                 }
+                 this.postinfo.push(d);
+             }
+         }
+      },
+      data: {
+        pagesize: "10",
+        postinfo:[],
+      }
+    })
+    </script>
 
 
                     <div>
