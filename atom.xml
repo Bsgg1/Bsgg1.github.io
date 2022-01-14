@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bsgg1.github.io/</id>
     <title>松松的小窝</title>
-    <updated>2022-01-14T13:00:55.291Z</updated>
+    <updated>2022-01-14T14:22:43.292Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bsgg1.github.io/"/>
     <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
@@ -101,7 +101,87 @@ signed main()
     return 0;
 }
 </code></pre>
-<p>结论：F是一个积性函数的话，G=<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo></mrow><annotation encoding="application/x-tex">\sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span></span></span></span>d<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>nF(d)也是积性函数</p>
+<p>结论：F是一个积性函数的话，G=<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo></mrow><annotation encoding="application/x-tex">\sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span></span></span></span>d<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>nF(d)也是积性函数<br>
+题目：cf 757-E<br>
+题意：定义函数F0(n)=u*v==n&amp;&amp;gcd(u,v)==1的个数<br>
+很显然我们可以发现F0(n)=2<sup>k</sup>,k是n分解后的项数，所以F0是一个积性函数<br>
+Fr(n)=<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo></mrow><annotation encoding="application/x-tex">\sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span></span></span></span>d<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>n Fr-1(d)<br>
+根据推论所以Fr也是一个积性函数<br>
+对于Fr(n)=Fr(p1<sup>q1</sup>)<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⨁</mo></mrow><annotation encoding="application/x-tex">\bigoplus</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">⨁</span></span></span></span>Fr(p2<sup>q2</sup>)<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⋯</mo></mrow><annotation encoding="application/x-tex">\cdots</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.31em;vertical-align:0em;"></span><span class="minner">⋯</span></span></span></span> Fr(pn<sup>qn</sup>)<br>
+然后可以发现对于形如Fr(p1<sup>q1</sup>)的求解是通过递归求得的，并且与p1无关，q最大是20，所以可以先预处理，然后进行求解<br>
+这个题在处理素数时可以只处理1000以内的素数，一个数最多有一个质因子是大于根号的<br>
+代码：</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define LOCAL
+#define ll long long
+const int N = 1e6 + 1, M = 21;
+const int mod = 1e9 + 7;
+int f[N][M];
+int t;
+int n, m;
+int res, k;
+int prime[N];
+bool st[N];
+int cnt;
+void init()
+{
+    for (int i = 2; i &lt;= 1000; i++)
+    {
+        if (!st[i])
+            prime[++cnt] = i;
+        for (int j = 1; j &lt;= cnt &amp;&amp; prime[j] * i &lt; N; j++)
+        {
+            st[i * prime[j]] = true;
+            if (i % prime[j] == 0)
+                break;
+        }
+    }
+}
+signed main()
+{
+#if ONLINE_JUDGE
+#else
+    freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);
+    freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);
+#endif
+    init();
+    f[0][0] = 1;
+    for (int i = 1; i &lt; M; i++)
+        f[0][i] = 2;
+    for (int i = 1; i &lt; N; i++)
+    {
+        for (int j = 0; j &lt; M; j++)
+            if (j == 0)
+                f[i][j] = 1;
+            else
+                f[i][j] = (f[i][j - 1] + f[i - 1][j]) % mod;
+    }
+    scanf(&quot;%d&quot;, &amp;t);
+    while (t--)
+    {
+        scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+        res = 1;
+        for (int i = 1; i &lt;= cnt; i++)
+        {
+            k = 0;
+            if (m &lt; prime[i])
+                break;
+            while (m % prime[i] == 0)
+            {
+                m /= prime[i];
+                k++;
+            }
+            res = 1ll * res * f[n][k] % mod;
+        }
+        if (m &gt; 1)
+            res = 1ll * res * f[n][1] % mod;
+        printf(&quot;%d\n&quot;, res);
+    }
+
+    return 0;
+}
+</code></pre>
 ]]></content>
     </entry>
 </feed>
