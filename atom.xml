@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bsgg1.github.io/</id>
     <title>松松的小窝</title>
-    <updated>2022-01-14T10:55:17.875Z</updated>
+    <updated>2022-01-14T11:06:16.121Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bsgg1.github.io/"/>
     <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
@@ -21,6 +21,26 @@
 如何求解积性函数？<br>
 n=p1<sup>q1</sup> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>×</mo></mrow><annotation encoding="application/x-tex">\times</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">×</span></span></span></span> p2<sup>q2</sup> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>×</mo></mrow><annotation encoding="application/x-tex">\times</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">×</span></span></span></span> p3<sup>q3</sup> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⋯</mo></mrow><annotation encoding="application/x-tex">\cdots</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.31em;vertical-align:0em;"></span><span class="minner">⋯</span></span></span></span> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>×</mo></mrow><annotation encoding="application/x-tex">\times</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">×</span></span></span></span> pn<sup>qn</sup><br>
 所以F(n)=F(p1<sup>q1</sup>) <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>×</mo></mrow><annotation encoding="application/x-tex">\times</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">×</span></span></span></span> F(p2<sup>q2</sup>) <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⋯</mo></mrow><annotation encoding="application/x-tex">\cdots</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.31em;vertical-align:0em;"></span><span class="minner">⋯</span></span></span></span> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>×</mo></mrow><annotation encoding="application/x-tex">\times</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">×</span></span></span></span> F(pn<sup>qn</sup>)</p>
+<p>利用欧拉筛求F(1-n)</p>
+<pre><code class="language-cpp">f[1]=1;
+for(int i=2;i&lt;=n;i++)
+{
+    if(!st[i]) prime[++cnt]=i;f[i]=cal_f(i,1);
+    for(int j=1;j&lt;=cnt&amp;&amp;i*prime[j]&lt;=n;j++)
+    {
+        st[i*p[j]]=true;
+        if(i%j==0)
+        {
+            cnt[i*prime[j]]=cnt[i]+1;
+            f[i*prime[j]]=f[i]/cal_f(p[j],cnt[i])*cal_f(p[j],cnt[i*f[j]]);
+            break;
+        }
+        cnt[i*f[j]]=1;
+        f[i*prime[j]]=f[i]*cal_f(f[j],1);
+    }
+}
+
+</code></pre>
 ]]></content>
     </entry>
 </feed>
