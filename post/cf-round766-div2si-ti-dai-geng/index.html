@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>CF round 756 div2（未完待更） | 松松的小窝</title>
+<title>cf round766 div2（四题待更） | 松松的小窝</title>
 
 <link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1642266348334">
 
@@ -89,72 +89,202 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    CF round 756 div2（未完待更）
+                    cf round766 div2（四题待更）
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2022-01-14 ·
+                        · 2022-01-16 ·
                     </time>
                     
                 </div>
                 <div class="post-content">
-                    <p>A:<br>
-考虑对于二进制的某一位，如果1的数量大于0的数量那么这一位就需要是1</p>
+                    <p>A：<br>
+首先考虑不可能的情况就是全部都是白色，如果有一个黑色就可以操作一行一列所以一定有解<br>
+如果r，c是黑ans为0<br>
+r，c所在的列或者行有一个黑就是1<br>
+否则就是2</p>
 <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+#define x first
+#define y second
 #define LOCAL
+#define int long long
 using namespace std;
-int c1[50], c2[50];
-int main()
+const int N = 550;
+using pii = pair&lt;int, int&gt;;
+pii que[N];
+char f[N][N];
+int t, n, k,m;
+signed main()
 {
 #if ONLINE_JUDGE
 #else
     freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);
     freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);
 #endif
-    int t;
-    cin &gt;&gt; t;
-    while (t--)
+    cin&gt;&gt;t;
+    while(t--)
     {
-        int n, k;
-        cin &gt;&gt; n &gt;&gt; k;
-        for (int i = 0; i &lt; k; i++)
-            c1[i] = c2[i] = 0;
-        while (n--)
+        cin&gt;&gt;n&gt;&gt;m;
+        int r,c;cin&gt;&gt;c&gt;&gt;r;
+        for(int i=1;i&lt;=n;i++)
+        for(int j=1;j&lt;=m;j++)
+        cin&gt;&gt;f[i][j];
+        int k1=0,k2=0;
+        int k3=0;
+        for(int i=1;i&lt;=n;i++) for(int j=1;j&lt;=m;j++) if(f[i][j]=='B') k3++;
+        for(int i=1;i&lt;=m;i++)
+        if(f[c][i]=='B') k1++;
+        for(int i=1;i&lt;=n;i++)
+        if(f[i][r]=='B') k2++;
+        //cout&lt;&lt;k1&lt;&lt;&quot; &quot;&lt;&lt;k2&lt;&lt;&quot;\n&quot;;
+        if(k3==0) puts(&quot;-1&quot;);
+        else
         {
-            int x;
-            cin &gt;&gt; x;
-            for (int i = 0; i &lt; k; i++)
-            {
-                if (x % 2 == 1)
-                    c1[i]++;
-                else
-                    c2[i]++;
-                x /= 2;
-            }
+            if(f[c][r]=='B') puts(&quot;0&quot;);
+            else if(k1||k2) puts(&quot;1&quot;);
+            
+            else puts(&quot;2&quot;);
+
+            
         }
-    
-        int a = 1, res = 0;
-        for (int i = 0; i &lt; k; i++)
-        {
-            if (c1[i] &gt; c2[i])
-                res = res + a;
-            a = a * 2;
-        }
-        cout &lt;&lt; res &lt;&lt; &quot;\n&quot;;
     }
+    
+    return 0;
+}
+</code></pre>
+<p>B:舔狗的故事<br>
+做法：首先是舔狗先选位置，女神会坐在距离他最远的地方，所以求出每个位置的距离，排个序输出就好了</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+#define x first
+#define y second
+#define LOCAL
+using namespace std;
+const int N = 550;
+using pii = pair&lt;int, int&gt;;
+pii que[N];
+
+int t, n, k,m;
+vector&lt;int&gt; e;
+signed main()
+{
+#if ONLINE_JUDGE
+#else
+    freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);
+    freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);
+#endif
+    cin&gt;&gt;t;
+    while(t--)
+    {
+        cin&gt;&gt;n&gt;&gt;m;
+        e.clear();
+        for(int i=1;i&lt;=n;i++)
+        for(int j=1;j&lt;=m;j++)
+        {
+    
+            e.push_back(max(max(i-1+j-1,abs(i-n)+j-1),max(abs(i-n)+abs(j-m),i-1+abs(j-m))));
+
+        }
+        sort(e.begin(),e.end());
+        for(auto x:e) cout&lt;&lt;x&lt;&lt;&quot; &quot;;
+        puts(&quot;&quot;);
+    }
+    
+    return 0;
+}
+</code></pre>
+<p>c:<br>
+素数除去2剩下的都是奇数，若想相邻两条边加起来还是素数，那么最终的形式只能是一条链，然后边权23交替就好</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+#define LOCAL
+#define x first
+#define y second
+using namespace std;
+int t;
+int n;
+typedef pair&lt;int,int&gt; pii;
+const int N=1e5+10;
+int h[N],e[2*N],ne[2*N],idx;
+pii q[N];
+int c[N];
+map&lt;pii,int&gt; mp;
+int res;
+void add(int a,int b)
+{
+    e[idx]=b,ne[idx]=h[a],h[a]=idx++;
+}
+void dfs(int u,int fa)
+{
+    for(int i=h[u];i!=-1;i=ne[i])
+    {
+        int j=e[i];
+        if(j==fa) continue;
+        mp[{u,j}]=mp[{j,u}]=res;
+        res=5-res;
+        dfs(j,u);
+    }
+}
+int main()
+{
+    #if ONLINE_JUDGE
+    #else
+    freopen(&quot;in.txt&quot;,&quot;r&quot;,stdin);
+    freopen(&quot;out.txt&quot;,&quot;w&quot;,stdout);
+    #endif
+    cin&gt;&gt;t;
+    while(t--)
+    {
+        idx=0;
+        mp.clear();
+        memset(h,-1,sizeof h);
+        cin&gt;&gt;n;
+        for(int i=1;i&lt;=n;i++) c[i]=0;
+        bool fl=true;
+        for(int i=1;i&lt;n;i++)
+        {
+            int x,y;cin&gt;&gt;x&gt;&gt;y;
+            add(x,y),add(y,x);
+            q[i]={x,y};
+            c[x]++,c[y]++;
+        }
+        int l;
+        for(int i=1;i&lt;=n;i++)
+        {
+            if(c[i]&gt;2) 
+            {
+                fl=false;
+                break;
+            }
+            if(c[i]==1) l=i;
+        }
+        //cout&lt;&lt;l&lt;&lt;&quot;\n&quot;;
+        res=2;
+        if(!fl) puts(&quot;-1&quot;);
+        else
+        {
+            dfs(l,-1);
+            for(int i=1;i&lt;n;i++) cout&lt;&lt;mp[q[i]]&lt;&lt;&quot; &quot;;
+            puts(&quot;&quot;);
+        }
+    }
+
 
     return 0;
 }
 </code></pre>
-<p>B:<br>
-很容易想到体中所说的匹配指的是存在两个一样的k，他们前边有a个数，后边有b个数，让a+b+1最大<br>
-然后我们发现长度就是n-dis(k1,k2)</p>
+<p>d:<br>
+由于gcd(a,b)小于等于ab的最小值，所以我们可以考虑对于一个数x若未出现在序列中，如果存在在序列中的大于x的倍数的gcd是x，那么通过一系列gcd操作就可以得到这个数</p>
 <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 #define LOCAL
+#define x first
+#define y second
 using namespace std;
-const int N=2e5+10;
-vector&lt;int&gt; e[N];
-int a[N];
+int t;
+int n;
+typedef pair&lt;int, int&gt; pii;
+const int N = 1e6 + 10;
+
+bool st[N];
+
 int main()
 {
 #if ONLINE_JUDGE
@@ -162,34 +292,28 @@ int main()
     freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);
     freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);
 #endif
-    int t;
-    cin &gt;&gt; t;
-    while (t--)
-    {
-        for(int i=1;i&lt;=150000;i++) e[i].clear();
-        int n, k;
-        cin &gt;&gt; n;
-        for(int i=1;i&lt;=n;i++)
-        {
-            int x;cin&gt;&gt;x;
-            e[x].push_back(i);
-        }
-        int res=-1;
 
-        for(int i=1;i&lt;=150000;i++)
-        {
-            if(e[i].size()&gt;=2)
-            {
-                k=0x3f3f3f3f;
-                for(int j=1;j&lt;e[i].size();j++)
-                {
-                    k=min(k,e[i][j]-e[i][j-1]);
-                }
-                res=max(res,n-k);
-            }
-        }
-        cout&lt;&lt;res&lt;&lt;&quot;\n&quot;;
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; i++)
+    {
+        int x;
+        cin &gt;&gt; x;
+        st[x] = true;
     }
+    int ans = 0;
+    for (int i = 5e5; i; i--)
+    {
+        if (!st[i])
+        {
+            int k = 0;
+            for (int j = i; j &lt;= 1e6; j += i)
+                if (st[j])
+                    k = __gcd(k, j);
+            if (k == i)
+                ans++;
+        }
+    }
+    cout &lt;&lt; ans &lt;&lt; &quot;\n&quot;;
 
     return 0;
 }
@@ -202,8 +326,8 @@ int main()
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://Bsgg1.github.io/post/ji-xing-han-shu-mo-bi-wu-si-fan-yan/" class="post-title gt-a-link">
-                    积性函数，莫比乌斯反演(未完待更)
+                <a href="https://Bsgg1.github.io/post/cf-round-756/" class="post-title gt-a-link">
+                    CF round 756 div2（未完待更）
                 </a>
             </div>
         
