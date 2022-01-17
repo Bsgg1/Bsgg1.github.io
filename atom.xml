@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bsgg1.github.io/</id>
     <title>松松的小窝</title>
-    <updated>2022-01-15T17:05:51.000Z</updated>
+    <updated>2022-01-17T07:05:21.569Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bsgg1.github.io/"/>
     <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://Bsgg1.github.io/images/avatar.png</logo>
     <icon>https://Bsgg1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, 松松的小窝</rights>
+    <entry>
+        <title type="html"><![CDATA[容斥原理]]></title>
+        <id>https://Bsgg1.github.io/post/rong-chi-yuan-li/</id>
+        <link href="https://Bsgg1.github.io/post/rong-chi-yuan-li/">
+        </link>
+        <updated>2022-01-17T07:03:05.000Z</updated>
+        <content type="html"><![CDATA[<p>容斥原理：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span> S-A<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⋃</mo></mrow><annotation encoding="application/x-tex">\bigcup</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">⋃</span></span></span></span>B<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span> =S-A-B+A<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⋂</mo></mrow><annotation encoding="application/x-tex">\bigcap</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">⋂</span></span></span></span>B</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[cf round766 div2（四题待更）]]></title>
         <id>https://Bsgg1.github.io/post/cf-round766-div2si-ti-dai-geng/</id>
