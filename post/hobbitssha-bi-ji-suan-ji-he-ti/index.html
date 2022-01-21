@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>松松的小窝</title>
+<title>Hobbits(傻逼计算几何题) | 松松的小窝</title>
 
 <link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1642770862482">
 
@@ -25,11 +25,11 @@
 
 
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <div class="main-content">
-        <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -85,82 +85,114 @@
     </div>
 </nav>
 
-        <div class="post-container">
-            <div class="post-detail gt-bg-theme-color-first">
-                <article class="gt-post-content">
-                    <h2 class="post-title">归档</h2>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Hobbits(傻逼计算几何题)
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2022-01-21 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <p>做法：倒着扫一遍维护最高点(最高点不一定是高度最高的点，是覆盖面积最大的点)，然后判断于直线的交点即可</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+#define x first
+#define y second
+using namespace std;
+const double eps = 1e-8;
+typedef pair&lt;double, double&gt; pdd;
+const int N=2e5+10;
+double operator*(pdd a, pdd b)
+{
+    return a.x * b.y - a.y * b.x;
+}
+pdd operator-(pdd a,pdd b)
+{
+    return {a.x-b.x,a.y-b.y};
+}
+struct line
+{
+    pdd st, ed;
+}li[N];
+pdd poi[N];
+int n;
+double h;
+int dcmp(double a, double b)
+{
+    if (fabs(a - b) &lt;= eps)
+        return 0;
+    if (a &lt; b)
+        return -1;
+    return 1;
+}
+double getdis(pdd a,pdd b)
+{
+    double dx=a.x-b.x,dy=a.y-b.y;
+    return sqrt(dx*dx+dy*dy);
+}
+double cross(pdd a,pdd b)
+{
+    return a*b;
+}
+pdd get_line_intersection(pdd p, pdd v, pdd q, pdd w)
+{
+    auto u = p - q;
+    double t = cross(w, u) / cross(v, w);
+    return {p.x + v.x * t, p.y + v.y * t};
+}
+
+pdd get_line_intersection(line a, line b)
+{
+    return get_line_intersection(a.st, a.ed - a.st, b.st, b.ed - b.st);
+}
+int main()
+{
+    cin&gt;&gt;n&gt;&gt;h;
+    for(int i=1;i&lt;=n;i++) scanf(&quot;%lf%lf&quot;,&amp;poi[i].x,&amp;poi[i].y);
+    pdd mx=poi[n],eye={poi[n].x,poi[n].y+h};
+    double ans=0;
+    for(int i=n-1;i&gt;=1;i--)
+    {
+        auto p1=mx-eye,p2=poi[i]-eye,p3=poi[i+1]-eye;
+        int f1=dcmp(p1*p2,0),f2=dcmp(p1*p3,0);
+        //cout&lt;&lt;f1&lt;&lt;&quot; &quot;&lt;&lt;f2&lt;&lt;&quot;\n&quot;;
+        if(f1&lt;=0&amp;&amp;f2&lt;=0)
+        ans+=getdis(poi[i],poi[i+1]);
+        else if(f1&lt;=0&amp;&amp;f2&gt;0)
+        {
+            pdd pp=get_line_intersection(line{eye,mx},line{poi[i],poi[i+1]});
+            ans+=getdis(pp,poi[i]);
+        }
+        if(f1&lt;=0) mx=poi[i];
+    }
+    printf(&quot;%.6lf&quot;,ans);
+    return 0;
+}
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://Bsgg1.github.io/post/rong-chi-yuan-li/" class="post-title gt-a-link">
+                    容斥原理
+                </a>
+            </div>
         
 
-<div class="archives-container">
-    
-        <h2 class="year gt-c-cotent-color-first">2022</h2>
         
-            
-                <article class="post">
-                    <a href="https://Bsgg1.github.io/post/hobbitssha-bi-ji-suan-ji-he-ti/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2022-01-21&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            Hobbits(傻逼计算几何题)
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://Bsgg1.github.io/post/rong-chi-yuan-li/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2022-01-17&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            容斥原理
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://Bsgg1.github.io/post/cf-round766-div2si-ti-dai-geng/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2022-01-16&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            cf round766 div2（四题待更）
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://Bsgg1.github.io/post/cf-round-756/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2022-01-14&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            CF round 756 div2（未完待更）
-                        </div>
-                    </a>
-                </article>
-            
-        
-            
-                <article class="post">
-                    <a href="https://Bsgg1.github.io/post/ji-xing-han-shu-mo-bi-wu-si-fan-yan/">
-                        <div class="post-title gt-c-content-color-first">
-                            <small><b>2022-01-14&nbsp;&nbsp;·&nbsp;&nbsp;</b></small>
-                            积性函数，莫比乌斯反演(未完待更)
-                        </div>
-                    </a>
-                </article>
-            
-        
-    
-</div>
 
-        <div class="pagination-container">
-    
-    
-</div>
+        
 
-    </article>
-</div>
-</div>
+        
+
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">代码最终篇，无爱自然神</div>
     <div class="social-container">
