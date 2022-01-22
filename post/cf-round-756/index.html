@@ -6,7 +6,7 @@
 
 <title>CF round 756 div2（未完待更） | 松松的小窝</title>
 
-<link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1642770862482">
+<link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1642858641497">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://Bsgg1.github.io//styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1642770862482" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1642858641497" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -192,6 +192,40 @@ int main()
     }
 
     return 0;
+}
+</code></pre>
+<p>C：考虑第i个位置是从第j个位置转移来的，n3dp</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int N = 550;
+int a[N], d[N], dp[N][N];
+int n, l, k;
+int main()
+{
+	cin &gt;&gt; n &gt;&gt; l &gt;&gt; k;
+	for (int i = 1; i &lt;= n; i++)
+		cin &gt;&gt; a[i];
+	a[n + 1] = l;
+	for (int i = 1; i &lt;= n; i++)
+		cin &gt;&gt; d[i];
+	d[n + 1] = 0;
+	n++;
+	memset(dp, 0x3f, sizeof dp);
+	dp[1][0] = 0;
+	for (int i = 2; i &lt;= n; i++){
+		for (int j = 0; j &lt;= k; j++){
+			dp[i][j] = dp[i - 1][j] + (a[i] - a[i - 1]) * d[i - 1];
+			for(int s=1;s&lt;i;s++)
+			{
+				if(j-(i-s-1)&lt;0) continue;
+				dp[i][j]=min(dp[i][j],dp[s][j-(i-s-1)]+(a[i]-a[s])*d[s]); 
+			}
+		}
+	}
+	int res=0x3f3f3f3f;
+	for(int i=0;i&lt;=k;i++) res=min(res,dp[n][i]);
+	cout&lt;&lt;res&lt;&lt;&quot;\n&quot;;
+	return 0;
 }
 </code></pre>
 
