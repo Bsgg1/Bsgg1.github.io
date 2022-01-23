@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>cf edu180 d | 松松的小窝</title>
+<title>CF 767 div2(垃圾场傻逼题) | 松松的小窝</title>
 
 <link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1642923534895">
 
@@ -89,21 +89,241 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    cf edu180 d
+                    CF 767 div2(垃圾场傻逼题)
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2021-12-28 ·
+                        · 2022-01-23 ·
                     </time>
                     
                 </div>
                 <div class="post-content">
-                    <p>巴拉巴拉巴拉</p>
+                    <p>A：排序后按从ram需求从小到大就可以了</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int t;
+const int N=110;
+int a[N],b[N];
+struct node{
+	int a,b;
+	bool operator&lt;(const node&amp;m)
+	{
+		return a&lt;m.a;
+	}
+}st[N];
+int n,k;
+int main()
+{
+	cin&gt;&gt;t;
+	while(t--)
+	{
+		cin&gt;&gt;n&gt;&gt;k;
+		for(int i=1;i&lt;=n;i++) cin&gt;&gt;st[i].a;
+		for(int i=1;i&lt;=n;i++) cin&gt;&gt;st[i].b;
+		sort(st+1,st+n+1);
+		for(int i=1;i&lt;=n;i++)
+		{
+			if(k&lt;st[i].a) break;
+			k+=st[i].b;
+		}
+		cout&lt;&lt;k&lt;&lt;&quot;\n&quot;;
+	}
+	return 0;
+}
+</code></pre>
+<p>B:偶数和奇数的gcd一定是1，所以把所有的奇数都变成偶数就可以了，特判只有一个奇数的情况</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+int t;
+const int N=110;
+int a[N],b[N];
+struct node{
+	int a,b;
+	bool operator&lt;(const node&amp;m)
+	{
+		return a&lt;m.a;
+	}
+}st[N];
+int n,k;
+int main()
+{
+	cin&gt;&gt;t;
+	while(t--)
+	{
+		int a,b,c;cin&gt;&gt;a&gt;&gt;b&gt;&gt;c;
+		int k=b-a+1;
+		if(b==a)
+		{
+		    if(a==1) puts(&quot;NO&quot;);
+		    else puts(&quot;YES&quot;);
+		}
+		else{
+		if(a%2==b%2&amp;&amp;a%2==1) k=k/2+1;
+		else k=k/2;
+		if(k&lt;=c) puts(&quot;YES&quot;);
+		else puts(&quot;NO&quot;);
+		}
+	}
+	return 0;
+}
+</code></pre>
+<p>C：每次找到最大的mex，按照题意模拟就可以</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+int t;
+#define LOCAL
+const int N = 2e5 + 10;
+int a[N];
+int n, k;
+int cnt[N];
+int f[N];
+int res[N];
+int ccnt;
+int ans[N];
+int main()
+{
+#if ONLINE_JUDGE
+#else
+	freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);
+	freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);
+#endif
+	scanf(&quot;%d&quot;, &amp;t);
+	while (t--)
+	{
+		ccnt = 0;
+		scanf(&quot;%d&quot;, &amp;n);
+		for (int i = 0; i &lt;= n; i++)
+			res[i] = ans[i] = f[i] = cnt[i] = 0;
+		for (int i = 1; i &lt;= n; i++)
+		{
+			scanf(&quot;%d&quot;, &amp;a[i]);
+			res[a[i]]++;
+		}
+		int l = 0, r = 0;
+		for (int i = 1; i &lt;= n; i++)
+		{
+			f[a[i]]++;
+			while (f[l])
+				l++;
+			if (!res[l])
+			{
+				ans[++ccnt] = l;
+				for (int j = r + 1; j &lt;= i; j++)
+					f[a[j]] = 0, res[a[j]]--;
+				r = i;
+				l = 0;
+			}
+		}
+		cout &lt;&lt; ccnt &lt;&lt; &quot;\n&quot;;
+		for (int i = 1; i &lt;= ccnt; i++)
+			cout &lt;&lt; ans[i] &lt;&lt; &quot; &quot;;
+		puts(&quot;&quot;);
+	}
+	return 0;
+}
+</code></pre>
+<p>D:如果存在回文串，只需要考虑3+2，2+3，以及reverse的情况就可以了</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+map&lt;string,vector&lt;int&gt;&gt; mp;
+set&lt;string&gt; se;
+int t,n;
+int main()
+{
+	cin&gt;&gt;t;
+	while(t--)
+	{
+		mp.clear();
+		se.clear();
+		cin&gt;&gt;n;
+		for(int i=1;i&lt;=n;i++)
+		{
+			string s;cin&gt;&gt;s;
+			se.insert(s);
+			mp[s].push_back(i);
+		}
+		bool f=false;
+		for(auto &amp;[x,y]:mp)
+		{
+			string s=x;
+			//cout&lt;&lt;x&lt;&lt;&quot;\n&quot;;
+			if(s.size()==3)
+			{
+				string s1=&quot;ab&quot;,s2=&quot;ab&quot;;
+				s1[0]=s[2],s1[1]=s[1];
+				s2[0]=s[1],s2[1]=s[0];
+				if(se.count(s1)){
+				if(*mp[s1].begin()&lt;y.back()){
+				f=true;
+				break;
+				}
+				}
+				if(se.count(s2))
+				{
+				if(*y.begin()&lt;mp[s2].back()){
+				f=true;
+				break;
+				}
+				}
+			}
+			reverse(s.begin(),s.end());
+			if(se.count(s))
+			{
+				f=true;
+				break;
+			}
+		}
+		if(f) puts(&quot;YES&quot;);
+		else puts(&quot;NO&quot;);
+	}
+	return 0;
+}
+</code></pre>
+<p>E:一个长为偶数的框，每次选一个点的四个邻点，一定可以通过选几次不重复地全部覆盖掉这个框，画画图就看明白了</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1100;
+bool st[N][N];
+int t,n;
+int main()
+{
+	cin&gt;&gt;t;
+	while(t--)
+	{
+		cin&gt;&gt;n;
+		memset(st,false,sizeof st);
+		int ans=0;
+		for(int i=1;i&lt;=n;i++)
+		{
+			for(int j=1;j&lt;=n;j++)
+			{
+				int x;cin&gt;&gt;x;
+				if(!st[i-1][j]&amp;&amp;!st[i+1][j]&amp;&amp;!st[i][j-1]&amp;&amp;!st[i][j+1])
+				{
+					ans^=x;
+					st[i-1][j]=st[i+1][j]=st[i][j-1]=st[i][j+1]=true;
+				}
+			}
+		}
+		cout&lt;&lt;ans&lt;&lt;&quot;\n&quot;;
+	}
+
+
+	return 0;
+}
+</code></pre>
 
                 </div>
             </article>
         </div>
 
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://Bsgg1.github.io/post/hobbitssha-bi-ji-suan-ji-he-ti/" class="post-title gt-a-link">
+                    Hobbits(傻逼计算几何题)
+                </a>
+            </div>
         
 
         
