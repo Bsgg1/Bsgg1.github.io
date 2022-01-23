@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>Gridea | 松松的小窝</title>
+<title>2021济南ICPC补 | 松松的小窝</title>
 
 <link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1642934565252">
 
@@ -25,11 +25,11 @@
 
 
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <div class="main-content">
-        <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -85,47 +85,93 @@
     </div>
 </nav>
 
-        <div class="current-tag-container">
-            <h2 class="title gt-c-content-color-first">
-                #Gridea
-            </h2>
-        </div>
-        <div class="post-list-container">
-    <div class="post-inner">
-        
-            <div class="post gt-bg-theme-color-second">
-                <div class="post-left">
-                    <div>
-                        
-                        <a href="https://Bsgg1.github.io/post/hello-gridea/">
-                            <span class="post-title gt-c-content-color-first">Hello Gridea</span>
-                        </a>
-                    </div>
-                    <div class="gt-post-content post-abstract gt-c-content-color-second">
-                        <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-
-                    </div>
-                    <div class="post-info">
-                        <time class="post-time gt-c-content-color-first">
-                            发布于 · 2018-12-12 ·
-                        </time>
-                        
-                            <a href="https://Bsgg1.github.io/tag/VJJzgGO_Y/" class="post-tag">
-                                # Gridea
-                            </a>
-                        
-                    </div>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    2021济南ICPC补
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2022-01-23 ·
+                    </time>
+                    
                 </div>
-                
+                <div class="post-content">
+                    <p>虽然已经过去很久了，不过这也是自己参加的第一次icpc，一直没有补题，今天突然想起来了，就把该会的写一写吧<br>
+D:考虑第一项为x，第i项是x+(i-1)*d，d是公差，然后很容易想到三分d，然后对于不同的d我们求得就是<br>
+x+(i-1)*d-ai，我们令数组ti表示ai-(i-1) d，然后就变成了经典的货仓选址问题，x等于ti的中位数就可以了</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define in128 __int128
+#define ll long long
+#define LOCAL
+int n;
+const int N=2e5+10;
+ll a[N];
+ll c[N];
+void print(in128 x)
+{
+	if(x&gt;9) print(x/10);
+	putchar(x%10+'0');
+}
+in128 check(ll d)
+{
+	for(int i=1;i&lt;=n;i++)
+	{
+		c[i]=a[i]-d*(i-1);
+	}
+	sort(c+1,c+n+1);
+	ll k=c[(n+1)/2];
+	in128 res=0;
+	for(int i=1;i&lt;=n;i++)
+	res+=abs(c[i]-k);
+	return res;
+}
+int main()
+{
+	#if ONLINE_JUDGE
+	#else
+	freopen(&quot;in.txt&quot;,&quot;r&quot;,stdin);
+	freopen(&quot;out.txt&quot;,&quot;w&quot;,stdout);
+	#endif
+	cin&gt;&gt;n;
+	for(int i=1;i&lt;=n;i++)
+	{
+		cin&gt;&gt;a[i];
+	}
+	in128 l=-1e13,r=1e13;
+	while(l&lt;r)
+	{
+		ll mid=l+(r-l)/3;
+		ll midmid=r-(r-l)/3;
+		if(check(mid)&lt;=check(midmid)) r=midmid-1;
+		else l=mid+1;
+	}
+	print(check(l));
+	return 0;
+}
+
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://Bsgg1.github.io/post/cf-767-div2la-ji-chang-sha-bi-ti/" class="post-title gt-a-link">
+                    CF 767 div2(垃圾场傻逼题)
+                </a>
             </div>
         
-    </div>
-</div>
-        <div class="pagination-container">
-    
-    
-</div>
+
+        
+
+        
+
+        
 
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">代码最终篇，无爱自然神</div>

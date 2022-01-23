@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bsgg1.github.io/</id>
     <title>松松的小窝</title>
-    <updated>2022-01-23T07:38:58.833Z</updated>
+    <updated>2022-01-23T10:42:47.382Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bsgg1.github.io/"/>
     <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
@@ -10,6 +10,69 @@
     <logo>https://Bsgg1.github.io/images/avatar.png</logo>
     <icon>https://Bsgg1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, 松松的小窝</rights>
+    <entry>
+        <title type="html"><![CDATA[2021济南ICPC补]]></title>
+        <id>https://Bsgg1.github.io/post/2021-ji-nan-icpc-bu/</id>
+        <link href="https://Bsgg1.github.io/post/2021-ji-nan-icpc-bu/">
+        </link>
+        <updated>2022-01-23T10:37:26.000Z</updated>
+        <content type="html"><![CDATA[<p>虽然已经过去很久了，不过这也是自己参加的第一次icpc，一直没有补题，今天突然想起来了，就把该会的写一写吧<br>
+D:考虑第一项为x，第i项是x+(i-1)*d，d是公差，然后很容易想到三分d，然后对于不同的d我们求得就是<br>
+x+(i-1)*d-ai，我们令数组ti表示ai-(i-1) d，然后就变成了经典的货仓选址问题，x等于ti的中位数就可以了</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define in128 __int128
+#define ll long long
+#define LOCAL
+int n;
+const int N=2e5+10;
+ll a[N];
+ll c[N];
+void print(in128 x)
+{
+	if(x&gt;9) print(x/10);
+	putchar(x%10+'0');
+}
+in128 check(ll d)
+{
+	for(int i=1;i&lt;=n;i++)
+	{
+		c[i]=a[i]-d*(i-1);
+	}
+	sort(c+1,c+n+1);
+	ll k=c[(n+1)/2];
+	in128 res=0;
+	for(int i=1;i&lt;=n;i++)
+	res+=abs(c[i]-k);
+	return res;
+}
+int main()
+{
+	#if ONLINE_JUDGE
+	#else
+	freopen(&quot;in.txt&quot;,&quot;r&quot;,stdin);
+	freopen(&quot;out.txt&quot;,&quot;w&quot;,stdout);
+	#endif
+	cin&gt;&gt;n;
+	for(int i=1;i&lt;=n;i++)
+	{
+		cin&gt;&gt;a[i];
+	}
+	in128 l=-1e13,r=1e13;
+	while(l&lt;r)
+	{
+		ll mid=l+(r-l)/3;
+		ll midmid=r-(r-l)/3;
+		if(check(mid)&lt;=check(midmid)) r=midmid-1;
+		else l=mid+1;
+	}
+	print(check(l));
+	return 0;
+}
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[CF 767 div2(垃圾场傻逼题)]]></title>
         <id>https://Bsgg1.github.io/post/cf-767-div2la-ji-chang-sha-bi-ti/</id>
