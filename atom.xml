@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bsgg1.github.io/</id>
     <title>松松的小窝</title>
-    <updated>2022-01-25T08:20:10.529Z</updated>
+    <updated>2022-01-25T11:24:21.596Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bsgg1.github.io/"/>
     <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
@@ -273,6 +273,62 @@ int main()
 	return 0;
 }
 
+</code></pre>
+<p>C：如果先手拿的是当前剩余的里边的最大的，后手一定拿的也是最大的，所以最大的一定是成对出现的，然后其次就要奇偶，如果价值ci的有偶数个那么就是两人各一半，反之就是先手多1变成偶数的情况，然后我们考虑从小到大取，对于当前取到的价值，如果说他有k个，k是奇数就先手多拿一个然后变成偶数，现在双方各取k/2个，可以发现价值大的是可以穿插在价值小的中间拿的，但是价值最大的一定是成对出现的</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+const int mod=998244353;
+map&lt;int,int&gt; mp;
+const int N=1e6+10;
+int fac[N],infac[N];
+int c[N];
+int qpw(int a,int b)
+{
+    int res=1%mod;
+    while(b)
+    {
+        if(b&amp;1) res=res*a%mod;
+        a=a*a%mod;
+        b&gt;&gt;=1;
+    }
+    return res;
+}
+void init()
+{
+    fac[0]=1;
+    for(int i=1;i&lt;N;i++) fac[i]=fac[i-1]*i%mod;
+    infac[N-1]=qpw(fac[N-1],mod-2);
+    for(int i=N-2;i&gt;=0;i--) infac[i]=infac[i+1]*(i+1)%mod;
+}
+int cal(int a,int b)
+{
+    if(a&lt;b) return 0;
+    return fac[a]*infac[b]%mod*infac[a-b]%mod;
+}
+signed main()
+{
+    int n;
+    init();
+    cin&gt;&gt;n;
+    while(n--)
+    {
+        int x;cin&gt;&gt;x;
+        c[x]++;
+    }
+    int sum=0,ans=1;
+    for(int i=1;i&lt;N;i++)
+    {
+        if(c[i]){
+            int y=c[i];
+        ans=ans*fac[y]%mod*cal(sum+(y)/2,(y)/2)%mod;
+        sum+=y;
+        }
+    }
+    cout&lt;&lt;ans&lt;&lt;&quot;\n&quot;;
+
+    return 0;
+}
 </code></pre>
 ]]></content>
     </entry>
