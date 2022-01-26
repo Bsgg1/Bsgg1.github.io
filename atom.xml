@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bsgg1.github.io/</id>
     <title>松松的小窝</title>
-    <updated>2022-01-26T13:53:15.854Z</updated>
+    <updated>2022-01-26T15:42:12.510Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bsgg1.github.io/"/>
     <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
@@ -1013,7 +1013,7 @@ int main()
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[积性函数，莫比乌斯反演(未完待更)]]></title>
+        <title type="html"><![CDATA[积性函数，莫比乌斯反演]]></title>
         <id>https://Bsgg1.github.io/post/ji-xing-han-shu-mo-bi-wu-si-fan-yan/</id>
         <link href="https://Bsgg1.github.io/post/ji-xing-han-shu-mo-bi-wu-si-fan-yan/">
         </link>
@@ -1201,6 +1201,16 @@ d=1<em>1<br>
 应用：杜教筛<br>
 M(n)=<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo></mrow><annotation encoding="application/x-tex">\sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span></span></span></span>(1-n) u(i)  (n范围1e11)<br>
 M(n)=1-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo></mrow><annotation encoding="application/x-tex">\sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span></span></span></span>(2-n)M(n/i(下取整))</p>
+<pre><code class="language-cpp">inline ll GetSumu(int n) {
+  if(n &lt;= N) return sumu[n]; // sumu是提前筛好的前缀和
+  if(Smu[n]) return Smu[n]; // 记忆化
+  ll ret = 1ll; // 单位元的前缀和就是 1
+  for(int l = 2, r; l &lt;= n; l = r + 1) {
+    r = n / (n / l); ret -= (r - l + 1) * GetSumu(n / l);
+    // (r - l + 1) 就是 I 在 [l, r] 的和
+  } return Smu[n] = ret; // 记忆化
+}
+</code></pre>
 ]]></content>
     </entry>
 </feed>
