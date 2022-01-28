@@ -1,0 +1,264 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>字符串相关(持续更新) | 松松的小窝</title>
+
+<link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1643370742717">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://Bsgg1.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            松松的小窝
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1643370742717" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    字符串相关(持续更新)
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2022-01-28 ·
+                    </time>
+                    
+                </div>
+                <div class="post-content">
+                    <p>1.字符串的Border,如果字符串S的同长度的前缀与后缀完全相同，则称此前缀为一个border<br>
+例如：S=bbabbab,则他的border有b,bbab,字符串本身也可以是border，具体根据题意判断<br>
+2.周期与循环节<br>
+用<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>s<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>代表s的长度，下标从1开始<br>
+对于p，如果满足p &lt; i <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>≤</mo></mrow><annotation encoding="application/x-tex">\leq</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mrel">≤</span></span></span></span> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>s<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span> 都有s(i)=s(i-p),那么p是s的一个周期<br>
+特别：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>s<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>也是s的一个周期<br>
+循环节：若字符串的周期满足 p<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>s<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span> ,则p是s的循环节<br>
+特别：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>s<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>也是s的循环节<br>
+结论：<br>
+p是s的周期<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⟸</mo></mrow><annotation encoding="application/x-tex">\Longleftarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.549em;vertical-align:-0.024em;"></span><span class="mrel">⟸</span></span></span></span> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⟹</mo></mrow><annotation encoding="application/x-tex">\Longrightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.549em;vertical-align:-0.024em;"></span><span class="mrel">⟹</span></span></span></span> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>s<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>-p是s的border<br>
+传递性S的border的border也是S的border<br>
+求S的所有border等价于求S的所有前缀的最大border<br>
+KMP<br>
+next数组：<br>
+next(i)=preffix(i)的非平凡的最大border(非平凡指去掉本身)<br>
+next(1)=0<br>
+考虑preffix(i)的大于1的border，去掉最后一个就变成了preffix(i-1)的border，所以求next(i)的时候，遍历preffix(i-1)的所有border，即next(i-1),next(next(i-1))....0,验证后一个字符是不是等于s(i)即可</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+#define x first
+#define y second
+using namespace std;
+const int N = 1000010;
+char a[N], b[N];
+int nxt[N], n, m;
+
+void kmp_nxt(char *s)
+{
+    for (int i = 2, j = 0; i &lt;= m; ++i)
+    {
+
+        nxt[i] = nxt[i - 1];
+        while (nxt[i] &amp;&amp; s[i] != s[nxt[i] + 1])
+            nxt[i] = nxt[nxt[i]];
+        nxt[i] += (s[i] == s[nxt[i] + 1]);
+    }
+}
+
+void solve() 
+{
+    scanf(&quot;%s%s&quot;, a + 1, b + 1);
+    n = strlen(a + 1), m = strlen(b + 1);
+    kmp_nxt(b);
+    for (int i = 1, j = 0; i &lt;= n; ++i)
+    {
+        while (j &amp;&amp; a[i] != b[j + 1])
+            j = nxt[j];
+        if (a[i] == b[j + 1])
+            ++j;
+        if (j == m)
+        {
+            printf(&quot;%d\n&quot;, i - j + 1);
+        }
+    }
+
+    for (int i = 1; i &lt;= m; ++i)
+        printf(&quot;%d &quot;, nxt[i]);
+}
+
+int main()
+{
+    int _ = 1;
+    while (_--)
+        solve();
+    return 0;
+}
+</code></pre>
+<p>例题：<br>
+对于字符串S，求他的最长子串p，满足p是S的前缀，p是S的后缀，同时p至少在S中出现三次<br>
+思路：首先p是S的border，可以通过kmp求出，由于p要最长且出现三次，可以确定答案一定在nxt(n)与nxt(nxt(n))之间，因为nxt(nxt(n))在S中至少出现了四次，所以答案就在这两个里边，注意特判掉不存在的情况</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+const int N=1e6+10;
+char s[N];
+int nxt[N];
+int len;
+void kmp()
+{
+	nxt[1]=0;
+	for(int i=2;i&lt;=len;i++)
+	{
+		nxt[i]=nxt[i-1];
+		while(nxt[i]&amp;&amp;s[i]!=s[nxt[i]+1]) nxt[i]=nxt[nxt[i]];
+		nxt[i]+=(s[i]==s[nxt[i]+1]);
+	}
+}
+int main()
+{
+	scanf(&quot;%s&quot;,s+1);
+	len=strlen(s+1);
+	kmp();
+	if(nxt[len]==0) 
+	{
+		puts(&quot;Just a legend&quot;);
+	}
+	else
+	{
+		bool f=false;
+		for(int i=1;i&lt;len;i++) if(nxt[i]==nxt[len]) {f=true;break;}
+		if(f) for(int i=1;i&lt;=nxt[len];i++) cout&lt;&lt;s[i];
+		else{ 
+            if(nxt[nxt[len]])
+            for(int i=1;i&lt;=nxt[nxt[len]];i++) cout&lt;&lt;s[i];
+            else puts(&quot;Just a legend&quot;);
+        }
+
+	}
+
+	return 0;
+}
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://Bsgg1.github.io/post/niu-ke-han-jia-ji-xun-ying-di-yi-chang-bu-ti-xian-chang-qing-kuang-9-ti/" class="post-title gt-a-link">
+                    牛客寒假集训营第一场补题(现场情况：9题)
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">代码最终篇，无爱自然神</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://Bsgg1.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
