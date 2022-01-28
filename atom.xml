@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bsgg1.github.io/</id>
     <title>松松的小窝</title>
-    <updated>2022-01-28T11:53:34.202Z</updated>
+    <updated>2022-01-28T13:05:28.342Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bsgg1.github.io/"/>
     <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
@@ -126,6 +126,16 @@ int main()
 	return 0;
 }
 </code></pre>
+<p>Border的性质：<br>
+周期定理：若p,q都是S的周期，那么gcd(p,q)，也是S的周期<br>
+一个串的Border数量是O(n)个，但是他们组成了(logN)个等差数列<br>
+Border树：<br>
+对于一个字符串S，他的border树(nxt树)共有n+1个节点<br>
+0是根节点，对于其他节点i的父节点是nxt(i)<br>
+性质：<br>
+每个前缀的所有border，节点i到根的链<br>
+哪些前缀有长度为x的border：x的子树<br>
+求两个前缀的公共border等于求LCA</p>
 ]]></content>
     </entry>
     <entry>
