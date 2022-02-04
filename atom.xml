@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://Bsgg1.github.io/</id>
+    <id>http://localhost:4000</id>
     <title>松松的小窝</title>
-    <updated>2022-01-28T13:10:33.971Z</updated>
+    <updated>2022-02-04T05:44:58.127Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://Bsgg1.github.io/"/>
-    <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
+    <link rel="alternate" href="http://localhost:4000"/>
+    <link rel="self" href="http://localhost:4000/atom.xml"/>
     <subtitle>代码最终篇，无爱自然神</subtitle>
-    <logo>https://Bsgg1.github.io/images/avatar.png</logo>
-    <icon>https://Bsgg1.github.io/favicon.ico</icon>
+    <logo>http://localhost:4000/images/avatar.png</logo>
+    <icon>http://localhost:4000/favicon.ico</icon>
     <rights>All rights reserved 2022, 松松的小窝</rights>
     <entry>
         <title type="html"><![CDATA[字符串相关(持续更新)]]></title>
-        <id>https://Bsgg1.github.io/post/zi-fu-chuan-xiang-guan-chi-xu-geng-xin/</id>
-        <link href="https://Bsgg1.github.io/post/zi-fu-chuan-xiang-guan-chi-xu-geng-xin/">
+        <id>http://localhost:4000/post/zi-fu-chuan-xiang-guan-chi-xu-geng-xin/</id>
+        <link href="http://localhost:4000/post/zi-fu-chuan-xiang-guan-chi-xu-geng-xin/">
         </link>
         <updated>2022-01-28T10:24:22.000Z</updated>
         <content type="html"><![CDATA[<p>1.字符串的Border,如果字符串S的同长度的前缀与后缀完全相同，则称此前缀为一个border<br>
@@ -140,8 +140,8 @@ Border树：<br>
     </entry>
     <entry>
         <title type="html"><![CDATA[牛客寒假集训营第一场补题(现场情况：9题)]]></title>
-        <id>https://Bsgg1.github.io/post/niu-ke-han-jia-ji-xun-ying-di-yi-chang-bu-ti-xian-chang-qing-kuang-9-ti/</id>
-        <link href="https://Bsgg1.github.io/post/niu-ke-han-jia-ji-xun-ying-di-yi-chang-bu-ti-xian-chang-qing-kuang-9-ti/">
+        <id>http://localhost:4000/post/niu-ke-han-jia-ji-xun-ying-di-yi-chang-bu-ti-xian-chang-qing-kuang-9-ti/</id>
+        <link href="http://localhost:4000/post/niu-ke-han-jia-ji-xun-ying-di-yi-chang-bu-ti-xian-chang-qing-kuang-9-ti/">
         </link>
         <updated>2022-01-25T07:38:13.000Z</updated>
         <content type="html"><![CDATA[<p>B：在%3意义下一样的数，在同一区间内分数的变化情况是一样的，考虑倍增去维护</p>
@@ -343,8 +343,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[2021济南ICPC补]]></title>
-        <id>https://Bsgg1.github.io/post/2021-ji-nan-icpc-bu/</id>
-        <link href="https://Bsgg1.github.io/post/2021-ji-nan-icpc-bu/">
+        <id>http://localhost:4000/post/2021-ji-nan-icpc-bu/</id>
+        <link href="http://localhost:4000/post/2021-ji-nan-icpc-bu/">
         </link>
         <updated>2022-01-23T10:37:26.000Z</updated>
         <content type="html"><![CDATA[<p>虽然已经过去很久了，不过这也是自己参加的第一次icpc，一直没有补题，今天突然想起来了，就把该会的写一写吧<br>
@@ -462,8 +462,8 @@ signed main()
     </entry>
     <entry>
         <title type="html"><![CDATA[CF 767 div2(垃圾场傻逼题)]]></title>
-        <id>https://Bsgg1.github.io/post/cf-767-div2la-ji-chang-sha-bi-ti/</id>
-        <link href="https://Bsgg1.github.io/post/cf-767-div2la-ji-chang-sha-bi-ti/">
+        <id>http://localhost:4000/post/cf-767-div2la-ji-chang-sha-bi-ti/</id>
+        <link href="http://localhost:4000/post/cf-767-div2la-ji-chang-sha-bi-ti/">
         </link>
         <updated>2022-01-23T07:32:08.000Z</updated>
         <content type="html"><![CDATA[<p>A：排序后按从ram需求从小到大就可以了</p>
@@ -684,8 +684,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[Hobbits(傻逼计算几何题)]]></title>
-        <id>https://Bsgg1.github.io/post/hobbitssha-bi-ji-suan-ji-he-ti/</id>
-        <link href="https://Bsgg1.github.io/post/hobbitssha-bi-ji-suan-ji-he-ti/">
+        <id>http://localhost:4000/post/hobbitssha-bi-ji-suan-ji-he-ti/</id>
+        <link href="http://localhost:4000/post/hobbitssha-bi-ji-suan-ji-he-ti/">
         </link>
         <updated>2022-01-21T13:11:24.000Z</updated>
         <content type="html"><![CDATA[<p>做法：倒着扫一遍维护最高点(最高点不一定是高度最高的点，是覆盖面积最大的点)，然后判断于直线的交点即可</p>
@@ -767,8 +767,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[容斥原理]]></title>
-        <id>https://Bsgg1.github.io/post/rong-chi-yuan-li/</id>
-        <link href="https://Bsgg1.github.io/post/rong-chi-yuan-li/">
+        <id>http://localhost:4000/post/rong-chi-yuan-li/</id>
+        <link href="http://localhost:4000/post/rong-chi-yuan-li/">
         </link>
         <updated>2022-01-17T07:03:05.000Z</updated>
         <content type="html"><![CDATA[<p>容斥原理：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span> S-A<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⋃</mo></mrow><annotation encoding="application/x-tex">\bigcup</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">⋃</span></span></span></span>B<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span> =S-A-B+A<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⋂</mo></mrow><annotation encoding="application/x-tex">\bigcap</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">⋂</span></span></span></span>B</p>
@@ -776,8 +776,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[cf round766 div2（四题待更）]]></title>
-        <id>https://Bsgg1.github.io/post/cf-round766-div2si-ti-dai-geng/</id>
-        <link href="https://Bsgg1.github.io/post/cf-round766-div2si-ti-dai-geng/">
+        <id>http://localhost:4000/post/cf-round766-div2si-ti-dai-geng/</id>
+        <link href="http://localhost:4000/post/cf-round766-div2si-ti-dai-geng/">
         </link>
         <updated>2022-01-15T16:44:34.000Z</updated>
         <content type="html"><![CDATA[<p>A：<br>
@@ -1004,8 +1004,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[CF round 756 div2（未完待更）]]></title>
-        <id>https://Bsgg1.github.io/post/cf-round-756/</id>
-        <link href="https://Bsgg1.github.io/post/cf-round-756/">
+        <id>http://localhost:4000/post/cf-round-756/</id>
+        <link href="http://localhost:4000/post/cf-round-756/">
         </link>
         <updated>2022-01-14T15:44:15.000Z</updated>
         <content type="html"><![CDATA[<p>A:<br>
@@ -1142,8 +1142,8 @@ int main()
     </entry>
     <entry>
         <title type="html"><![CDATA[积性函数，莫比乌斯反演]]></title>
-        <id>https://Bsgg1.github.io/post/ji-xing-han-shu-mo-bi-wu-si-fan-yan/</id>
-        <link href="https://Bsgg1.github.io/post/ji-xing-han-shu-mo-bi-wu-si-fan-yan/">
+        <id>http://localhost:4000/post/ji-xing-han-shu-mo-bi-wu-si-fan-yan/</id>
+        <link href="http://localhost:4000/post/ji-xing-han-shu-mo-bi-wu-si-fan-yan/">
         </link>
         <updated>2022-01-14T10:24:43.000Z</updated>
         <content type="html"><![CDATA[<p>积性函数的定义：如果对于一个函数F : N - R,对于任意互质的a与b都有F(ab)=F(a)f(b),则称F为积性函数<br>
@@ -1339,6 +1339,8 @@ M(n)=1-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo
   } return Smu[n] = ret; // 记忆化
 }
 </code></pre>
+<p>函数d(a*b)表示a×b的约数个数<br>
+那么d=<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo></mrow><annotation encoding="application/x-tex">\sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span></span></span></span> x<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>a <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo></mrow><annotation encoding="application/x-tex">\sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span></span></span></span> y<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>b gcd(x,y)==1</p>
 ]]></content>
     </entry>
 </feed>
