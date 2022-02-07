@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bsgg1.github.io/</id>
     <title>松松的小窝</title>
-    <updated>2022-02-04T06:23:48.426Z</updated>
+    <updated>2022-02-07T06:38:11.498Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bsgg1.github.io/"/>
     <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
@@ -10,6 +10,89 @@
     <logo>https://Bsgg1.github.io/images/avatar.png</logo>
     <icon>https://Bsgg1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, 松松的小窝</rights>
+    <entry>
+        <title type="html"><![CDATA[土狗daisiki的日常坐牢]]></title>
+        <id>https://Bsgg1.github.io/post/tu-gou-daisiki-de-ri-chang-zuo-lao/</id>
+        <link href="https://Bsgg1.github.io/post/tu-gou-daisiki-de-ri-chang-zuo-lao/">
+        </link>
+        <updated>2022-02-07T06:32:56.000Z</updated>
+        <content type="html"><![CDATA[<p><img src="https://Bsgg1.github.io//post-images/1644215628068.jpg" alt="" loading="lazy"><br>
+https://codeforces.com/contest/1508/problem/A<br>
+Tag:字符串，思维构造<br>
+题意：给三个由0和1构成的字符p_i，长度为2n，构造一个长度为3n的字符串S，让至少两个p是S的子序列<br>
+思路：首先可以得出任意p_i的cnt_0或者cnt_1是大于等于n的，考虑为什么是三个p?抽屉原理，一定会有两个p同时满足cnt1或者cnt0大于等于n，这样我们就固定好了n的长度，剩下的长度是2n,直接放就可以</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+string s[3];
+int f[3];
+int t, n;
+string check(int a, int b)
+{
+	char x;
+	string ans;
+	if (f[a] &gt;= n)
+		x = '1';
+	else
+		x = '0';
+	int l = 0, r = 0;
+	for (int i = 1; i &lt;= n; i++)
+	{
+		while (l &lt; 2 * n &amp;&amp; s[a][l] != x)
+			ans += s[a][l++];
+		while (r &lt; 2 * n &amp;&amp; s[b][r] != x)
+			ans += s[b][r++];
+		l++, r++;
+		ans += x;
+	}
+	while (l &lt; 2 * n)
+		ans += s[a][l++];
+	while (r &lt; 2 * n)
+		ans += s[b][r++];
+	return ans;
+}
+void solve()
+{
+	for (int i = 0; i &lt; 3; i++)
+	{
+		for (int j = 0; j &lt; 3; j++)
+		{
+			if (j == i)
+				continue;
+			if (f[i] &gt; n &amp;&amp; f[j] &lt; n)
+				continue;
+			if (f[i] &lt; n &amp;&amp; f[j] &gt; n)
+				continue;
+			string ss = check(i, j);
+			if (ss.size() &lt;= n * 3)
+			{
+				cout &lt;&lt; ss &lt;&lt; &quot;\n&quot;;
+				return;
+			}
+		}
+	}
+}
+int main()
+{
+	cin &gt;&gt; t;
+	while (t--)
+	{
+		cin &gt;&gt; n;
+		f[0] = f[1] = f[2] = 0;
+		for (int i = 0; i &lt; 3; i++)
+		{
+			cin &gt;&gt; s[i];
+			for (int j = 0; j &lt; 2 * n; j++)
+				if (s[i][j] == '1')
+					f[i]++;
+		}
+		solve();
+	}
+
+	return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[字符串相关(持续更新)]]></title>
         <id>https://Bsgg1.github.io/post/zi-fu-chuan-xiang-guan-chi-xu-geng-xin/</id>

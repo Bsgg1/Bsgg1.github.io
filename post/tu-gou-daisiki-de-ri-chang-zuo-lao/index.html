@@ -1,11 +1,10 @@
 <html>
-
 <head>
     <meta charset="utf-8"/>
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>友情链接 - 松松的小窝</title>
+<title>土狗daisiki的日常坐牢 | 松松的小窝</title>
 
 <link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1644215884058">
 
@@ -26,12 +25,11 @@
 
 
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
-
 <body>
 <div class="main gt-bg-theme-color-first">
-        <div class="main-content">
-            <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -87,54 +85,115 @@
     </div>
 </nav>
 
-            <div class="post-container">
-                <div class="post-detail">
-                    <article>
-                        <!-- <div class="post-content-wrapper"> -->
-                            <div class="post-content">
-                                <div class="friends-desc">
-                                    
-                                </div>
-                                <h3 id="linklist">友链列表</h3>
-                                
-                                    
-                                        <div class="friend-box">
-                                            <img class="friend-avatar" src="">
-                                            <div class="flink-info">
-                                                
-                                                        <a class="gt-c-content-color-first" href="https://greydoveh.github.io/" target="_blank">GreyDove</a>
-                                                        
-                                                <br />
-                                                <div class="flink-info-desc gt-c-content-color-first">
-                                                    大佬
-                                                </div>
-                                            </div>
-                                        </div>
-                                    
-                                        <div class="friend-box">
-                                            <img class="friend-avatar" src="">
-                                            <div class="flink-info">
-                                                
-                                                        <a class="gt-c-content-color-first" href="" target="_blank"></a>
-                                                        
-                                                <br />
-                                                <div class="flink-info-desc gt-c-content-color-first">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    
-                                
-                            </div>
-                        <!-- </div> -->
-                    </article>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    土狗daisiki的日常坐牢
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2022-02-07 ·
+                    </time>
+                    
                 </div>
-                
+                <div class="post-content">
+                    <p><img src="https://Bsgg1.github.io//post-images/1644215628068.jpg" alt="" loading="lazy"><br>
+https://codeforces.com/contest/1508/problem/A<br>
+Tag:字符串，思维构造<br>
+题意：给三个由0和1构成的字符p_i，长度为2n，构造一个长度为3n的字符串S，让至少两个p是S的子序列<br>
+思路：首先可以得出任意p_i的cnt_0或者cnt_1是大于等于n的，考虑为什么是三个p?抽屉原理，一定会有两个p同时满足cnt1或者cnt0大于等于n，这样我们就固定好了n的长度，剩下的长度是2n,直接放就可以</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+string s[3];
+int f[3];
+int t, n;
+string check(int a, int b)
+{
+	char x;
+	string ans;
+	if (f[a] &gt;= n)
+		x = '1';
+	else
+		x = '0';
+	int l = 0, r = 0;
+	for (int i = 1; i &lt;= n; i++)
+	{
+		while (l &lt; 2 * n &amp;&amp; s[a][l] != x)
+			ans += s[a][l++];
+		while (r &lt; 2 * n &amp;&amp; s[b][r] != x)
+			ans += s[b][r++];
+		l++, r++;
+		ans += x;
+	}
+	while (l &lt; 2 * n)
+		ans += s[a][l++];
+	while (r &lt; 2 * n)
+		ans += s[b][r++];
+	return ans;
+}
+void solve()
+{
+	for (int i = 0; i &lt; 3; i++)
+	{
+		for (int j = 0; j &lt; 3; j++)
+		{
+			if (j == i)
+				continue;
+			if (f[i] &gt; n &amp;&amp; f[j] &lt; n)
+				continue;
+			if (f[i] &lt; n &amp;&amp; f[j] &gt; n)
+				continue;
+			string ss = check(i, j);
+			if (ss.size() &lt;= n * 3)
+			{
+				cout &lt;&lt; ss &lt;&lt; &quot;\n&quot;;
+				return;
+			}
+		}
+	}
+}
+int main()
+{
+	cin &gt;&gt; t;
+	while (t--)
+	{
+		cin &gt;&gt; n;
+		f[0] = f[1] = f[2] = 0;
+		for (int i = 0; i &lt; 3; i++)
+		{
+			cin &gt;&gt; s[i];
+			for (int j = 0; j &lt; 2 * n; j++)
+				if (s[i][j] == '1')
+					f[i]++;
+		}
+		solve();
+	}
+
+	return 0;
+}
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://Bsgg1.github.io/post/zi-fu-chuan-xiang-guan-chi-xu-geng-xin/" class="post-title gt-a-link">
+                    字符串相关(持续更新)
+                </a>
             </div>
+        
 
+        
 
+        
 
-            <div class="site-footer gt-c-content-color-first">
+        
+
+        <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">代码最终篇，无爱自然神</div>
     <div class="social-container">
         
@@ -164,8 +223,7 @@
   hljs.initHighlightingOnLoad()
 </script>
 
-        </div>
     </div>
+</div>
 </body>
-
 </html>
