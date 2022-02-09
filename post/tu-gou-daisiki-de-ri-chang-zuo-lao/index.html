@@ -6,7 +6,7 @@
 
 <title>土狗daisiki的日常坐牢 | 松松的小窝</title>
 
-<link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1644407061941">
+<link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1644409121904">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://Bsgg1.github.io//styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1644407061941" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1644409121904" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -219,6 +219,55 @@ int main()
             for(auto x:v) cout&lt;&lt;x&lt;&lt;&quot; &quot;;
             puts(&quot;&quot;);
         }
+    }
+
+    return 0;
+}
+</code></pre>
+<p>https://codeforces.com/contest/1381/problem/B<br>
+Tag:思维转化后就是01背包<br>
+首先通过题意可以分析出连续减小的一段区间一定是属于一个数组的，然后就可以把连续下降的长度分别求出来，然后dp能不能得到n就好了</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int N = 4e3 + 10;
+int f[N], p[N], tot;
+int dp[N];
+int main()
+{
+    int t;
+    cin &gt;&gt; t;
+    while (t--)
+    {
+        int n;
+        cin &gt;&gt; n;
+        tot = 0;
+        memset(dp, -1, sizeof dp);
+        for (int i = 1; i &lt;= 2 * n; i++)
+            cin &gt;&gt; f[i];
+        for (int l = 1, r; l &lt;= 2 * n; l = r + 1)
+        {
+            r = l;
+            while (r &lt;= 2 * n &amp;&amp; f[r] &lt;= f[l])
+                r++;
+            r--;
+            p[tot++] = r - l + 1;
+            if (r == 2 * n)
+                break;
+        }
+        memset(dp, -0x3f3f3f3f, sizeof(dp));
+        dp[0] = 0;
+        for (int i = 0; i &lt; tot; i++)
+        {
+            for (int j = n; j &gt;= p[i]; j--)
+            {
+
+                dp[j] = max(dp[j], dp[j - p[i]] + p[i]);
+            }
+        }
+        if (dp[n] &gt; 0)
+            puts(&quot;YES&quot;);
+        else
+            puts(&quot;NO&quot;);
     }
 
     return 0;
