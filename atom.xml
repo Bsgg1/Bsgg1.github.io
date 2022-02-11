@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bsgg1.github.io/</id>
     <title>松松的小窝</title>
-    <updated>2022-02-09T14:06:52.753Z</updated>
+    <updated>2022-02-11T05:58:20.525Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bsgg1.github.io/"/>
     <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
@@ -10,6 +10,97 @@
     <logo>https://Bsgg1.github.io/images/avatar.png</logo>
     <icon>https://Bsgg1.github.io/favicon.ico</icon>
     <rights>All rights reserved 2022, 松松的小窝</rights>
+    <entry>
+        <title type="html"><![CDATA[矩阵与高斯消元记录]]></title>
+        <id>https://Bsgg1.github.io/post/ju-zhen-yu-gao-si-xiao-yuan-ji-lu/</id>
+        <link href="https://Bsgg1.github.io/post/ju-zhen-yu-gao-si-xiao-yuan-ji-lu/">
+        </link>
+        <updated>2022-02-11T05:28:03.000Z</updated>
+        <content type="html"><![CDATA[<p>https://ac.nowcoder.com/acm/problem/14607<br>
+a_n=2<em>a_n-1+n<sup>2</sup><br>
+得到4</em>4矩阵<br>
+a_n=2a_n-1+(n-1)<sup>2</sup>+2(n-1)+1<br>
+n<sup>2</sup>=(n-1)<sup>2</sup>+2(n-1)+1<br>
+n=n-1+1<br>
+1=1</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define ll long long
+#define int long long
+const long long mod = 1e9 + 9;
+struct matrix
+{
+    long long n, m;
+    long long num[5][5];
+    void clear() { memset(num, 0, sizeof(num)); }
+};
+matrix operator*(matrix a, matrix b)
+{ //重载矩阵乘法
+    matrix ans;
+    ans.clear();
+    ans.n = a.n, ans.m = b.m;
+    for (int i = 0; i &lt; a.n; i++)
+        for (int j = 0; j &lt; b.m; j++)
+            for (int k = 0; k &lt; a.m; k++)
+                ans.num[i][j] = ((ans.num[i][j] + a.num[i][k] * b.num[k][j] % mod) % mod + mod) % mod;
+    return ans;
+}
+matrix qpw(matrix a, long long x)
+{ //矩阵快速幂
+    matrix ans;
+    ans.clear();
+    ans.n = ans.m = a.n;
+    for (int i = 0; i &lt; a.n; i++)
+        ans.num[i][i] = 1;
+    while (x)
+    {
+        if (x &amp; 1)
+            ans = ans * a;
+        a = a * a;
+        x &gt;&gt;= 1;
+    }
+    return ans;
+}
+matrix operator+(matrix a, matrix b)
+{ //重载矩阵加法
+    matrix ans;
+    ans.clear();
+    ans.n = a.n, ans.m = a.m;
+    for (int i = 0; i &lt; a.n; i++)
+        for (int j = 0; j &lt; a.m; j++)
+            ans.num[i][j] = (a.num[i][j] + b.num[i][j]) % mod;
+    return ans;
+}
+bool operator!=(matrix a, matrix b)
+{
+    if (a.n != b.n || a.m != b.m)
+        return 1;
+    for (int i = 1; i &lt;= a.n; i++)
+        for (int j = 1; j &lt;= a.m; j++)
+            if (a.num[i][j] != b.num[i][j])
+                return 1;
+    return 0;
+}
+matrix base, tran;
+signed main()
+{
+    base.clear(), base.n = 1, base.m = 4;
+    base.num[0][0] = 0, base.num[0][1] = 1, base.num[0][2] = -1, base.num[0][3] = 1;
+    tran.clear(), tran.n = tran.m = 4;
+    tran.num[0][0] = tran.num[2][1] = tran.num[2][0] = 2;
+    tran.num[1][0] = tran.num[3][0] = tran.num[1][1] = tran.num[3][1] = tran.num[2][2] = tran.num[3][2] = tran.num[3][3] = 1;
+    ll x;
+    while (cin &gt;&gt; x)
+    {
+
+        cout &lt;&lt; (base * qpw(tran, x + 1)).num[0][0] % mod &lt;&lt; &quot;\n&quot;;
+    }
+
+    return 0;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[线性代数相关]]></title>
         <id>https://Bsgg1.github.io/post/xian-xing-dai-shu-xiang-guan/</id>
@@ -1226,144 +1317,6 @@ int main()
     cout &lt;&lt; ans &lt;&lt; &quot;\n&quot;;
 
     return 0;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[CF round 756 div2（未完待更）]]></title>
-        <id>https://Bsgg1.github.io/post/cf-round-756/</id>
-        <link href="https://Bsgg1.github.io/post/cf-round-756/">
-        </link>
-        <updated>2022-01-14T15:44:15.000Z</updated>
-        <content type="html"><![CDATA[<p>A:<br>
-考虑对于二进制的某一位，如果1的数量大于0的数量那么这一位就需要是1</p>
-<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-#define LOCAL
-using namespace std;
-int c1[50], c2[50];
-int main()
-{
-#if ONLINE_JUDGE
-#else
-    freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);
-    freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);
-#endif
-    int t;
-    cin &gt;&gt; t;
-    while (t--)
-    {
-        int n, k;
-        cin &gt;&gt; n &gt;&gt; k;
-        for (int i = 0; i &lt; k; i++)
-            c1[i] = c2[i] = 0;
-        while (n--)
-        {
-            int x;
-            cin &gt;&gt; x;
-            for (int i = 0; i &lt; k; i++)
-            {
-                if (x % 2 == 1)
-                    c1[i]++;
-                else
-                    c2[i]++;
-                x /= 2;
-            }
-        }
-    
-        int a = 1, res = 0;
-        for (int i = 0; i &lt; k; i++)
-        {
-            if (c1[i] &gt; c2[i])
-                res = res + a;
-            a = a * 2;
-        }
-        cout &lt;&lt; res &lt;&lt; &quot;\n&quot;;
-    }
-
-    return 0;
-}
-</code></pre>
-<p>B:<br>
-很容易想到体中所说的匹配指的是存在两个一样的k，他们前边有a个数，后边有b个数，让a+b+1最大<br>
-然后我们发现长度就是n-dis(k1,k2)</p>
-<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-#define LOCAL
-using namespace std;
-const int N=2e5+10;
-vector&lt;int&gt; e[N];
-int a[N];
-int main()
-{
-#if ONLINE_JUDGE
-#else
-    freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);
-    freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);
-#endif
-    int t;
-    cin &gt;&gt; t;
-    while (t--)
-    {
-        for(int i=1;i&lt;=150000;i++) e[i].clear();
-        int n, k;
-        cin &gt;&gt; n;
-        for(int i=1;i&lt;=n;i++)
-        {
-            int x;cin&gt;&gt;x;
-            e[x].push_back(i);
-        }
-        int res=-1;
-
-        for(int i=1;i&lt;=150000;i++)
-        {
-            if(e[i].size()&gt;=2)
-            {
-                k=0x3f3f3f3f;
-                for(int j=1;j&lt;e[i].size();j++)
-                {
-                    k=min(k,e[i][j]-e[i][j-1]);
-                }
-                res=max(res,n-k);
-            }
-        }
-        cout&lt;&lt;res&lt;&lt;&quot;\n&quot;;
-    }
-
-    return 0;
-}
-</code></pre>
-<p>C：考虑第i个位置是从第j个位置转移来的，n3dp</p>
-<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-const int N = 550;
-int a[N], d[N], dp[N][N];
-int n, l, k;
-int main()
-{
-	cin &gt;&gt; n &gt;&gt; l &gt;&gt; k;
-	for (int i = 1; i &lt;= n; i++)
-		cin &gt;&gt; a[i];
-	a[n + 1] = l;
-	for (int i = 1; i &lt;= n; i++)
-		cin &gt;&gt; d[i];
-	d[n + 1] = 0;
-	n++;
-	memset(dp, 0x3f, sizeof dp);
-	dp[1][0] = 0;
-	for (int i = 2; i &lt;= n; i++){
-		for (int j = 0; j &lt;= k; j++){
-			dp[i][j] = dp[i - 1][j] + (a[i] - a[i - 1]) * d[i - 1];
-			for(int s=1;s&lt;i;s++)
-			{
-				if(j-(i-s-1)&lt;0) continue;
-				dp[i][j]=min(dp[i][j],dp[s][j-(i-s-1)]+(a[i]-a[s])*d[s]); 
-			}
-		}
-	}
-	int res=0x3f3f3f3f;
-	for(int i=0;i&lt;=k;i++) res=min(res,dp[n][i]);
-	cout&lt;&lt;res&lt;&lt;&quot;\n&quot;;
-	return 0;
 }
 </code></pre>
 ]]></content>
