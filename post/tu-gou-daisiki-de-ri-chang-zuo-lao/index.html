@@ -6,7 +6,7 @@
 
 <title>土狗daisiki的日常坐牢 | 松松的小窝</title>
 
-<link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1645110532563">
+<link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1645111042409">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://Bsgg1.github.io//styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1645110532563" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1645111042409" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -176,7 +176,7 @@ int main()
 <p>https://codeforces.com/contest/1381/problem/A2<br>
 Tag：思维<br>
 字符串a，b，对a进行下列操作至多2n次使得a变成b，操作：选长度为k的前缀，其中0变成1，1变成0，并且翻转<br>
-思路：讲a变为全0或者全1至多n次，然后考虑倒着匹配b，至多反转n次</p>
+思路：将a变为全0或者全1至多n次，然后考虑倒着匹配b，至多反转n次</p>
 <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
 const int N=1e5+10;
@@ -270,6 +270,210 @@ int main()
             puts(&quot;NO&quot;);
     }
 
+    return 0;
+}
+</code></pre>
+<p>https://codeforces.com/contest/1416/problem/A<br>
+Tag:思维 1500<br>
+思路：考虑数字i可以作为区间最小值出现的区间最小长度是多少，然后树状数组更新</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define INF 0x3f3f3f3f
+const int N=3e5+10;
+int t;
+vector&lt;int&gt; v[N];
+int f[N];
+int lowbit(int x)
+{
+    return x&amp;-x;
+}
+void add(int x,int val)
+{
+    while(x&lt;N)
+    f[x]=min(f[x],val),x+=lowbit(x);
+}
+int query(int x)
+{
+    int res=INF;
+    while(x)
+    {
+        res=min(f[x],res);
+        x-=lowbit(x);
+    }
+    return res;
+}
+int main()
+{
+    cin&gt;&gt;t;
+    while(t--)
+    {
+        int n;cin&gt;&gt;n;for(int i=1;i&lt;=n;i++) f[i]=INF;
+        int mx=0;
+        for(int i=1;i&lt;=n;i++)
+        {
+            int x;cin&gt;&gt;x;v[x].push_back(i);
+            mx=max(mx,x);
+        }
+        for(int i=1;i&lt;=mx;i++)
+        {
+            if(!v[i].size()) continue;
+            int len=max(v[i][0],n-v[i].back()+1);
+            for(int j=1;j&lt;v[i].size();j++)
+            len=max(len,v[i][j]-v[i][j-1]);
+            add(len,i);
+        }
+        for(int i=1;i&lt;=n;i++)
+        {
+            int x=query(i);
+            if(x==INF) cout&lt;&lt;-1&lt;&lt;&quot; &quot;;
+            else cout&lt;&lt;x&lt;&lt;&quot; &quot;;
+        }
+        puts(&quot;&quot;);
+
+        for(int i=1;i&lt;=mx;i++) v[i].clear();
+    }
+
+
+    return 0;
+}
+</code></pre>
+<p>https://codeforces.com/contest/1416/problem/B<br>
+Tag:构造，思维题 2000<br>
+由于a_i大于等于1，那么考虑前i-1的和一定大于等于i%a_i，所以可以先把所有的ai都转移到第一项上</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+#define INF 0x3f3f3f3f
+const int N=3e5+10;
+int t;
+int n,sum;
+int f[N];
+struct node{
+    int a,b,c;
+}st[N*3];
+int cnt;
+void solve()
+{
+    if(sum%n)
+    {
+        cout&lt;&lt;-1&lt;&lt;&quot;\n&quot;;
+        return ;
+    }
+    int p=sum/n;
+    for(int i=2;i&lt;=n;i++)
+    {
+        st[cnt++]={1,i,(i-f[i]%i)%i};
+        f[i]+=(i-f[i]%i)%i;
+        st[cnt++]={i,1,f[i]/i};
+        
+    }
+    for(int i=2;i&lt;=n;i++)
+    {
+        st[cnt++]={1,i,p};
+    }
+
+    cout&lt;&lt;cnt&lt;&lt;&quot;\n&quot;;
+    for(int i=0;i&lt;cnt;i++) cout&lt;&lt;st[i].a&lt;&lt;&quot; &quot;&lt;&lt;st[i].b&lt;&lt;&quot; &quot;&lt;&lt;st[i].c&lt;&lt;&quot;\n&quot;;
+    return ;
+}
+signed main()
+{
+    int t;cin&gt;&gt;t;
+    while(t--)
+    {
+        cin&gt;&gt;n;
+        sum=0;
+        cnt=0;
+        for(int i=1;i&lt;=n;i++) cin&gt;&gt;f[i],sum+=f[i];
+        solve();
+    }
+    return 0;
+}
+</code></pre>
+<p>https://codeforces.com/contest/1416/problem/C<br>
+Tag:01trie,贪心 2000<br>
+首先可以通过01trie求逆序对的数量，只需要看最高位不一样的就可以，然后考虑异或x的这一位是0和是1对最终答案的影响</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define int long long
+#define ll long long
+const int N = 1e5 + 10;
+int n, a[3*N], trie[N*40][2], p, ans;
+int cnt;
+int dp[50][2];
+vector&lt;int&gt; v[N * 40];
+inline ll read()
+{
+    int x = 0, f = 1;
+    char c = getchar();
+    while (c &lt; '0' || c &gt; '9')
+    {
+        if (c == '-')
+            f = -1;
+        c = getchar();
+    }
+    while (c &gt;= '0' &amp;&amp; c &lt;= '9')
+    {
+        x = x * 10 + c - '0';
+        c = getchar();
+    }
+    return f * x;
+}
+void insert(int x,int pos){
+    int rt = 0;
+    for(int i=30;i&gt;=0;i--){
+        int op = (x&gt;&gt;i&amp;1)?1:0;
+        if(!trie[rt][op]) trie[rt][op] = ++cnt;
+        rt = trie[rt][op];
+        v[rt].push_back(pos);
+    }
+}
+void dfs(int pos, int u)
+{
+    if (pos == -1)
+        return;
+    int lm = trie[u][0], rm = trie[u][1];
+    int sl = v[lm].size(), rl = v[rm].size();
+    int c = 0;
+    int r = 0;
+    for (int i = 0; i &lt; sl; i++)
+    {
+        while (r &lt; rl &amp;&amp; v[rm][r] &lt; v[lm][i])
+            r++;
+        c += r;
+    }
+    dp[pos][0] += c;
+    dp[pos][1] += sl * rl - c;
+    if (lm)
+        dfs(pos - 1, lm);
+    if (rm)
+        dfs(pos - 1, rm);
+}
+signed main()
+{
+    int t =1;
+    while (t--)
+    {
+        n = read();
+        for (int i = 0; i &lt; n; i++)
+        {
+            a[i] = read();
+            insert(a[i],  i);
+        }
+        dfs(30, 0);
+        int ans = 0, res = 0;
+        for (int i = 0; i &lt;= 30; i++)
+        {
+            if (dp[i][0] &lt;= dp[i][1])
+                ans += dp[i][0];
+            else
+            {
+                ans += dp[i][1];
+                res += (1 &lt;&lt; i);
+            }
+        }
+        cout &lt;&lt; ans &lt;&lt; &quot; &quot; &lt;&lt; res &lt;&lt; &quot; &quot;;
+    }
     return 0;
 }
 </code></pre>
