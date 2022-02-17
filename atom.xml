@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bsgg1.github.io/</id>
     <title>松松的小窝</title>
-    <updated>2022-02-17T15:17:24.630Z</updated>
+    <updated>2022-02-17T15:19:22.603Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bsgg1.github.io/"/>
     <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
@@ -529,6 +529,84 @@ signed main()
         }
         cout &lt;&lt; ans &lt;&lt; &quot; &quot; &lt;&lt; res &lt;&lt; &quot; &quot;;
     }
+    return 0;
+}
+</code></pre>
+<p>http://oj.acm-icpc.top/<br>
+01trie<br>
+首先对于所有的ai建立01trie，然后枚举i与j，先删掉ij所在的链，求完后在插入即可</p>
+<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+#define ll long long
+const int N=1010;
+int f[N];
+int trie[N*40][2],cnt;
+ll ans;
+int col[N*40];
+void insert(int x,int val)
+{
+    int rt=0;
+    for(int i=31;i&gt;=0;i--)
+    {
+        int op=x&gt;&gt;i&amp;1;
+        if(!trie[rt][op]) trie[rt][op]=++cnt;
+        rt=trie[rt][op];
+        col[rt]+=val;
+    }
+}
+void update(int x,int val)
+{
+    int rt=0;
+    for(int i=31;i&gt;=0;i--)
+    {
+        int op=x&gt;&gt;1&amp;1;
+        rt=trie[rt][op];
+        col[rt]+=val;
+    }
+}
+ll search(int u, ll x)
+{
+    ll res = 0;
+    int t = u;
+    for (int i = 31; i &gt;= 0; i--)
+    {
+        int op=(x&gt;&gt;i)&amp;1;
+        if (trie[t][op^1]&amp;&amp;col[trie[t][op^1]]&gt;0)
+        {
+            //cout&lt;&lt;col[trie[t][op^1]]&lt;&lt;&quot; &quot;&lt;&lt;i&lt;&lt;&quot;\n&quot;;
+            res += 1ll &lt;&lt; i;
+            t = trie[t][op^1];
+        }
+        else
+        {
+            t = trie[t][op];
+        }
+    }
+    return res;
+}
+
+signed main()
+{
+    cin.tie(0)-&gt;sync_with_stdio(false);
+    int n;cin&gt;&gt;n;
+    for(int i=1;i&lt;=n;i++)
+    {
+        cin&gt;&gt;f[i],insert(f[i],1);
+    }
+    for(int i=1;i&lt;=n;i++)
+    {
+        insert(f[i],-1);
+        for(int j=1;j&lt;=n;j++)
+        {
+            if(j==i) continue;
+            insert(f[j],-1);
+            ans=max(ans,search(0,1ll*(f[i]+f[j])));
+            //cout&lt;&lt;search(0,f[i]+f[j])&lt;&lt;&quot;\n&quot;;
+            insert(f[j],1);
+        }
+        insert(f[i],1);
+    }
+    cout&lt;&lt;ans&lt;&lt;&quot;\n&quot;;
     return 0;
 }
 </code></pre>
