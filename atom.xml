@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bsgg1.github.io/</id>
     <title>松松的小窝</title>
-    <updated>2022-02-17T15:19:22.603Z</updated>
+    <updated>2022-02-19T09:34:40.384Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bsgg1.github.io/"/>
     <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
@@ -610,6 +610,27 @@ signed main()
     return 0;
 }
 </code></pre>
+<p>https://codeforces.com/contest/1268/problem/B<br>
+Tag:染色法 思维 2000<br>
+考虑对于棋盘上的棋子，我们进行黑白染色，一个棋子的相邻棋子和他的颜色不相同，然后数量少的就是答案<br>
+代码：https://codeforces.com/contest/1268/submission/146842700<br>
+https://codeforces.com/contest/1268/problem/C<br>
+Tag:树状数组 2300<br>
+首先对于特殊情况，如果所有数都是挨在一起的，那么问题就转变为了求逆序对的数量，扩展到一般情况，我们首先需要把所有的数移动到一起，类似经典问题:货舱选址，我们取中间位置即可，然后对于快速求区间第k大的数，可以用库中平衡树，对于每一组的答案就是逆序对的数量+移动所需要的花费<br>
+移动所需花费：假设前k个位置pos_i，他们分别需要走到mid，mid-1，也就是mid*k-<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∑</mo></mrow><annotation encoding="application/x-tex">\sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span></span></span></span>pos_i+1+2+..+k-1，后k个求法可以类比<br>
+代码：https://codeforces.com/contest/1268/submission/146850202<br>
+https://codeforces.com/contest/1252/problem/E<br>
+Tag：思维 2300<br>
+首先我们可以预处理出每个音符的范围，考虑最后一个的范围是l-r，然后倒着推一遍，可以得到所有音符的区间，然后我们在贪心的选在区间中的最小的值就可以了<br>
+代码：https://codeforces.com/gym/366293/submission/146892389<br>
+https://codeforces.com/gym/366293/problem/K<br>
+Tag:线段树 矩阵 2100<br>
+考虑对于字符串A和B分别有不同的转移矩阵，当修改一段区间的时候，是把区间的A与B全部交换，我们可以在进行build的时候同时把两种情况都处理出来，处理两个转移矩阵，矩阵1是未修改这个区间的，矩阵2是修改后的，如果我们修改这个区间直接swap就可以<br>
+代码：https://codeforces.com/gym/366293/submission/146887886<br>
+https://codeforces.com/gym/366293/problem/G<br>
+Tag:线段树 2100<br>
+考虑怎么用线段树来维护，对于m次裁员，我们可以分别求出来第m次裁员后，比randall能力小的员工，如果修改了第x天的某个员工，会导致x-m的个数都发生变化，在进行第i次裁员时，需要先将第i-1次时的人数减去k，然后在从新员工中求出能力小于randall的员工，对于某一次修改，如果修改的值小于randal，那么就要区间减1，修改后的值小于randal就进行区间加1，因为第i次的人数会影响到i+1次，然后会对后边的项都产生影响，所以是区间修改<br>
+代码：https://codeforces.com/gym/366293/submission/146897735</p>
 ]]></content>
     </entry>
     <entry>
