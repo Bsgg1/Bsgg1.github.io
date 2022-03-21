@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bsgg1.github.io/</id>
     <title>松松和女朋友的秘密约会地点</title>
-    <updated>2022-03-21T06:07:41.497Z</updated>
+    <updated>2022-03-21T06:09:16.277Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bsgg1.github.io/"/>
     <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
@@ -848,6 +848,71 @@ int main()
     cout &lt;&lt; ans.size() &lt;&lt; &quot;\n&quot;;
     for (auto x : ans)
         cout &lt;&lt; x &lt;&lt; &quot;\n&quot;;
+    return 0;
+}
+</code></pre>
+<p>01Trie，对于二进制的题可以考虑01Trie</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+#define ll long long
+int n, a[1000005], trie[10000005][2], cnt, ans;
+inline ll read()
+{
+    int x = 0, f = 1;
+    char c = getchar();
+    while (c &lt; '0' || c &gt; '9')
+    {
+        if (c == '-')
+            f = -1;
+        c = getchar();
+    }
+    while (c &gt;= '0' &amp;&amp; c &lt;= '9')
+    {
+        x = x * 10 + c - '0';
+        c = getchar();
+    }
+    return f * x;
+}
+void insert(int x){
+    int rt = 0;
+    for(int i=30;i&gt;=0;i--){
+        int op = (x&gt;&gt;i&amp;1)?1:0;
+        if(!trie[rt][op]) trie[rt][op] = ++cnt;
+        rt = trie[rt][op];
+    }
+}
+
+int search(int u, int x)
+{
+    int res = 0, t = u;
+    for (int i = 30; i &gt;= 0; i--)
+    {
+        if (trie[t][!((x &gt;&gt; i) &amp; 1)])
+        {
+            res += 1 &lt;&lt; i;
+            t = trie[t][!((x &gt;&gt; i) &amp; 1)];
+        }
+        else
+        {
+            t = trie[t][(x &gt;&gt; i) &amp; 1];
+        }
+    }
+    return res;
+}
+
+int main()
+{
+    n = read();
+    for (int i = 0; i &lt; n; i++)
+    {
+        a[i] = read();
+        insert(a[i]);
+    }
+    for (int i = 0; i &lt; n; i++)
+    {
+        ans = max(ans, search(0, a[i]));
+    }
+    printf(&quot;%d\n&quot;, ans);
     return 0;
 }
 </code></pre>
