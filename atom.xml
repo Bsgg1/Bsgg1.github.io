@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bsgg1.github.io/</id>
     <title>松松和女朋友的秘密约会地点</title>
-    <updated>2022-03-21T06:21:12.554Z</updated>
+    <updated>2022-03-21T07:21:44.907Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bsgg1.github.io/"/>
     <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
@@ -913,6 +913,121 @@ int main()
         ans = max(ans, search(0, a[i]));
     }
     printf(&quot;%d\n&quot;, ans);
+    return 0;
+}
+</code></pre>
+<p>Border树(失配树，next树，kmp扩展的数据结构)<br>
+对于一个字符串 S n=<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span>S<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∣</mo></mrow><annotation encoding="application/x-tex">\mid</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∣</span></span></span></span> ,一共有n+1个节点0是根对于其他节点父节点为nxt(i)<br>
+当建立好border树后，可以直接lca求两个前缀的最长border<br>
+模板题目：https://www.luogu.com.cn/problem/P5829<br>
+做法：首先kmp求出nxt数组，根据nxt数组求lca，注意一个问题，对于ab求出来的lca c，如果c等于ab中的一个，那么答案应该是nxt(c)</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+#define x first
+#define y second
+using namespace std;
+const int N = 1000010;
+const int M = 3000005;
+int id[M], vis[M], depth[M], tot;
+int f[M][25], lg[M];
+char b[N];
+int h[N], e[N * 2], ne[N * 2], idx;
+int nxt[N], n, m;
+void add(int a, int b)
+{
+    e[idx] = b, ne[idx] = h[a], h[a] = idx++;
+}
+void dfs(int u, int fa, int dep)
+{
+    id[u] = ++tot;
+    vis[tot] = u;
+    depth[tot] = dep;
+    for (int i = h[u]; ~i; i = ne[i])
+    {
+        int v = e[i];
+        if (v == fa)
+            continue;
+        dfs(v, u, dep + 1);
+        vis[++tot] = u;
+        depth[tot] = dep;
+    }
+    return;
+}
+void RMQ()
+{
+    for (int i = 1; i &lt;= tot; i++)
+        lg[i] = lg[i - 1] + (1 &lt;&lt; lg[i - 1] == i);
+    for (int i = 1; i &lt;= tot; i++)
+        f[i][0] = i;
+    for (int j = 1; (1 &lt;&lt; j) &lt;= tot; j++)
+        for (int i = 1; i + (1 &lt;&lt; j) - 1 &lt;= tot; i++)
+        {
+            int a = f[i][j - 1];
+            int b = f[i + (1 &lt;&lt; (j - 1))][j - 1];
+            if (depth[a] &lt;= depth[b])
+                f[i][j] = a;
+            else
+                f[i][j] = b;
+        }
+    return;
+}
+int st(int x, int y)
+{
+    int r = id[x];
+    int l = id[y];
+    if (r &lt; l)
+        swap(r, l);
+    int k = lg[r - l + 1] - 1;
+    int a = f[l][k];
+    int b = f[r - (1 &lt;&lt; k) + 1][k];
+    if (depth[a] &lt;= depth[b])
+        return vis[a];
+    else
+        return vis[b];
+}
+
+void kmp_nxt(char *s)
+{
+    for (int i = 2; i &lt;= m; ++i)
+    {
+
+        nxt[i] = nxt[i - 1];
+        while (nxt[i] &amp;&amp; s[i] != s[nxt[i] + 1])
+            nxt[i] = nxt[nxt[i]];
+        nxt[i] += (s[i] == s[nxt[i] + 1]);
+    }
+}
+
+void solve()
+{
+    scanf(&quot;%s&quot;, b + 1);
+    m = strlen(b + 1);
+    kmp_nxt(b);
+    memset(h, -1, sizeof h);
+    for (int i = 1; i &lt;= m; i++)
+    {
+        add(nxt[i], i);
+    }
+    dfs(0, -1, 1);
+    RMQ();
+    int q;
+    cin &gt;&gt; q;
+    while (q--)
+    {
+        int a, b;
+        cin &gt;&gt; a &gt;&gt; b;
+        int k = st(a, b);
+        if (k == a || k == b)
+            cout &lt;&lt; nxt[k] &lt;&lt; &quot;\n&quot;;
+        else
+            cout &lt;&lt; k &lt;&lt; &quot;\n&quot;;
+    }
+}
+
+int main()
+{
+    int _ = 1;
+    while (_--)
+        solve();
     return 0;
 }
 </code></pre>
