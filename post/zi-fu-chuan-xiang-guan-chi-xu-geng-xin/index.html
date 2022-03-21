@@ -6,7 +6,7 @@
 
 <title>字符串相关(持续更新) | 松松和女朋友的秘密约会地点</title>
 
-<link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1645265119060">
+<link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1647842833990">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://Bsgg1.github.io//styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1645265119060" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1647842833990" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -218,6 +218,98 @@ Border树：<br>
 每个前缀的所有border，节点i到根的链<br>
 哪些前缀有长度为x的border：x的子树<br>
 求两个前缀的公共border等于求LCA</p>
+<p>Trie<br>
+字典：一个字符串的集合称为字典<br>
+字典串：字典中的串称为字典串<br>
+trie是一颗有根树，每个点最多有字符集大小个后继边，每个边上有一个字符，每个点表示一个前缀串，每个点还有一个终止标记<br>
+例题：https://ac.nowcoder.com/acm/problem/15049<br>
+考虑怎样的串可以成为最小字典序，首先字典中不能存在他的前缀，其次根据他的大小不能产生环，比如abcb,abcc，acb三个串，如果abcc想成为最小字典序，那么对于第二个字符需要有b小于c，对于第四个字符需要满足c小于b，有环，不符合要求<br>
+解法：构建trie，每个串跑拓扑排序</p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+const int N = 3e5 + 5;
+int n, p = 1, trie[N][26], vis[N], deg[N];
+string s[30005];
+vector&lt;string&gt; ans;
+vector&lt;int&gt; v[30];
+void insert(string a, int len)
+{
+    int u = 1;
+    for (int i = 0; i &lt; len; i++)
+    {
+        int c = a[i] - 'a';
+        if (!trie[u][c])
+            trie[u][c] = ++p;
+        u = trie[u][c];
+    }
+    vis[u] += 1;
+}
+bool topsort()
+{
+    queue&lt;int&gt; q;
+    for (int i = 0; i &lt; 26; i++)
+        if (!deg[i])
+            q.push(i);
+    while (!q.empty())
+    {
+        auto f = q.front();
+        q.pop();
+        for (auto x : v[f])
+        {
+            deg[x]--;
+            if (deg[x] == 0)
+                q.push(x);
+        }
+    }
+    for (int i = 0; i &lt; 26; i++)
+        if (deg[i] &gt; 0)
+            return false;
+    return true;
+}
+bool check(string s, int len)
+{
+    int u = 1;
+    for (int i = 0; i &lt; 26; i++)
+        v[i].clear(), deg[i] = 0;
+    for (int i = 0; i &lt; len; i++)
+    {
+        if (vis[u])
+            return false;
+        int x = s[i] - 'a';
+        for (int j = 0; j &lt; 26; j++)
+        {
+            if (trie[u][j] &amp;&amp; j != x)
+            {
+                deg[j]++;
+                v[x].push_back(j);
+            }
+        }
+        u = trie[u][x];
+    }
+    return topsort();
+}
+int main()
+{
+    int n;
+    cin &gt;&gt; n;
+    for (int i = 1; i &lt;= n; i++)
+    {
+        cin &gt;&gt; s[i];
+        int len = s[i].size();
+        insert(s[i], len);
+    }
+    for (int i = 1; i &lt;= n; i++)
+    {
+        int len = s[i].size();
+        if (check(s[i], len))
+            ans.emplace_back(s[i]);
+    }
+    cout &lt;&lt; ans.size() &lt;&lt; &quot;\n&quot;;
+    for (auto x : ans)
+        cout &lt;&lt; x &lt;&lt; &quot;\n&quot;;
+    return 0;
+}
+</code></pre>
 
                 </div>
             </article>
