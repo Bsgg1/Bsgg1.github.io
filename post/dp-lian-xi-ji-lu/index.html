@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>Hobbits(傻逼计算几何题) | 松松和女朋友的秘密约会地点</title>
+<title>DP练习记录 | 松松和女朋友的秘密约会地点</title>
 
 <link rel="shortcut icon" href="https://Bsgg1.github.io//favicon.ico?v=1647940665558">
 
@@ -89,87 +89,70 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    Hobbits(傻逼计算几何题)
+                    DP练习记录
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2022-01-21 ·
+                        · 2022-03-22 ·
                     </time>
                     
                 </div>
                 <div class="post-content">
-                    <p>做法：倒着扫一遍维护最高点(最高点不一定是高度最高的点，是覆盖面积最大的点)，然后判断于直线的交点即可</p>
+                    <p>1.https://www.luogu.com.cn/problem/P4158<br>
+Tag:背包，线性dp<br>
+思路:首先每一层是互不影响的，我们可以求出每一层粉刷i次的贡献，然后就是一个背包<br>
+对于每一层的方案考虑dp(i,j)，表示粉刷到i个格子时，粉刷了j次<br>
+当第i个格子不粉刷，那么就继承自上一次，dp(i,j)=dp(i-1,j)<br>
+第i个格子粉刷，我们需要枚举端点，即第j次粉刷时的起点(终点是i)<br>
+那么就有转移<br>
+for(int l=i-1;l&gt;=0;l--)<br>
+dp(i,j)=max(dp(i,j),dp(l)(j-1)+max(s(i)-s(l),i-l-s(i)+s(l)))<br>
+其中的s数组是一个前缀和，我们记录的是每一行前i个中1的数量，也就是判断第j次粉刷刷蓝色和红色哪个贡献多<br>
+然后剩下的就是一个背包<br>
+f数组表示前i行粉刷j次的最大值</p>
+<pre><code class="language-cpp">for(int j=k;j&gt;=1;j--)
+{
+        for(int t=1;t&lt;=j;t++)
+        f[j]=max(f[j],f[j-t]+dp[m][t]);
+}
+</code></pre>
+<p>有一个优化，对于每一层枚举粉刷几次时，最多需要枚举到m，不需要枚举到全部次数，否则会TLE</p>
 <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
-#define x first
-#define y second
 using namespace std;
-const double eps = 1e-8;
-typedef pair&lt;double, double&gt; pdd;
-const int N=2e5+10;
-double operator*(pdd a, pdd b)
-{
-    return a.x * b.y - a.y * b.x;
-}
-pdd operator-(pdd a,pdd b)
-{
-    return {a.x-b.x,a.y-b.y};
-}
-struct line
-{
-    pdd st, ed;
-}li[N];
-pdd poi[N];
-int n;
-double h;
-int dcmp(double a, double b)
-{
-    if (fabs(a - b) &lt;= eps)
-        return 0;
-    if (a &lt; b)
-        return -1;
-    return 1;
-}
-double getdis(pdd a,pdd b)
-{
-    double dx=a.x-b.x,dy=a.y-b.y;
-    return sqrt(dx*dx+dy*dy);
-}
-double cross(pdd a,pdd b)
-{
-    return a*b;
-}
-pdd get_line_intersection(pdd p, pdd v, pdd q, pdd w)
-{
-    auto u = p - q;
-    double t = cross(w, u) / cross(v, w);
-    return {p.x + v.x * t, p.y + v.y * t};
-}
-
-pdd get_line_intersection(line a, line b)
-{
-    return get_line_intersection(a.st, a.ed - a.st, b.st, b.ed - b.st);
-}
+const int N = 55, M = 2505;
+int sum[N][N];
+char mp[N][N];
+int dp[N][M];
+int f[M];
+int n, m, k;
 int main()
 {
-    cin&gt;&gt;n&gt;&gt;h;
-    for(int i=1;i&lt;=n;i++) scanf(&quot;%lf%lf&quot;,&amp;poi[i].x,&amp;poi[i].y);
-    pdd mx=poi[n],eye={poi[n].x,poi[n].y+h};
-    double ans=0;
-    for(int i=n-1;i&gt;=1;i--)
+    scanf(&quot;%d%d%d&quot;, &amp;n, &amp;m, &amp;k);
+    for (int i = 1; i &lt;= n; i++)
     {
-        auto p1=mx-eye,p2=poi[i]-eye,p3=poi[i+1]-eye;
-        int f1=dcmp(p1*p2,0),f2=dcmp(p1*p3,0);
-        //cout&lt;&lt;f1&lt;&lt;&quot; &quot;&lt;&lt;f2&lt;&lt;&quot;\n&quot;;
-        if(f1&lt;=0&amp;&amp;f2&lt;=0)
-        ans+=getdis(poi[i],poi[i+1]);
-        else if(f1&lt;=0&amp;&amp;f2&gt;0)
+        scanf(&quot;%s&quot;, mp[i] + 1);
+        for (int j = 1; j &lt;= m; j++)
         {
-            pdd pp=get_line_intersection(line{eye,mx},line{poi[i],poi[i+1]});
-            ans+=getdis(pp,poi[i]);
+            sum[i][j] = sum[i][j - 1] + (mp[i][j] == '1');
         }
-        if(f1&lt;=0) mx=poi[i];
+        for (int t = 1; t &lt;= m; t++)
+        {
+            for (int j = 1; j &lt;= m; j++)
+            {
+                dp[j][t] = dp[j - 1][t];
+                for (int l = j - 1; l &gt;= 0; l--)
+                {
+                    dp[j][t] = max(dp[j][t], dp[l][t - 1] + max(sum[i][j] - sum[i][l], j - l - sum[i][j] + sum[i][l]));
+                }
+            }
+        }
+        for (int j = k; j &gt;= 1; j--)
+        {
+            for (int t = 1; t &lt;= j; t++)
+                f[j] = max(f[j], f[j - t] + dp[m][t]);
+        }
     }
-    printf(&quot;%.6lf&quot;,ans);
+    printf(&quot;%d\n&quot;, f[k]);
     return 0;
 }
 </code></pre>
@@ -181,8 +164,8 @@ int main()
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://Bsgg1.github.io/post/rong-chi-yuan-li/" class="post-title gt-a-link">
-                    容斥原理
+                <a href="https://Bsgg1.github.io/post/ju-zhen-yu-gao-si-xiao-yuan-ji-lu/" class="post-title gt-a-link">
+                    矩阵与高斯消元记录
                 </a>
             </div>
         
