@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Bsgg1.github.io/</id>
-    <title>松松和女朋友的秘密约会地点</title>
-    <updated>2022-03-22T09:18:35.217Z</updated>
+    <title>松松的小窝</title>
+    <updated>2022-03-30T00:14:08.042Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Bsgg1.github.io/"/>
     <link rel="self" href="https://Bsgg1.github.io/atom.xml"/>
-    <subtitle>今年和女朋友能不能都拿牌呢？
+    <subtitle>今年能不能拿牌呢？
 </subtitle>
     <logo>https://Bsgg1.github.io/images/avatar.png</logo>
     <icon>https://Bsgg1.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2022, 松松和女朋友的秘密约会地点</rights>
+    <rights>All rights reserved 2022, 松松的小窝</rights>
     <entry>
         <title type="html"><![CDATA[DP练习记录]]></title>
         <id>https://Bsgg1.github.io/post/dp-lian-xi-ji-lu/</id>
